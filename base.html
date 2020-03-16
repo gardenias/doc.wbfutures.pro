@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.10">
+<title>接入必读</title>
+<style>
+@import url("https://docs.spring.io/spring-boot/docs/current/reference/html/css/spring.css");
+
+div .switch {
+    margin-left: 8px;
+    border-color: #406A2A;
+    border-radius: 4px 4px 0 0;
+}
+
+div .switch--item {
+    color: #406A2A;
+    background-color: transparent;
+}
+
+div .switch--item.selected {
+    background-color: #406A2A;
+}
+
+div .switch--item:not(:first-child) {
+    border-color: #406A2A;
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>接入必读</h1>
+<div class="details">
+<span id="revnumber">version 1.0</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#接口地址">1. 接口地址</a></li>
+<li><a href="#签名认证">2. 签名认证</a>
+<ul class="sectlevel2">
+<li><a href="#申请创建-api-key">2.1. 申请创建 API Key</a></li>
+<li><a href="#签名说明">2.2. 签名说明</a></li>
+<li><a href="#签名步骤">2.3. 签名步骤</a></li>
+<li><a href="#签名失败">2.4. 签名失败</a></li>
+</ul>
+</li>
+<li><a href="#代码实例">3. 代码实例</a>
+<ul class="sectlevel2">
+<li><a href="#javascript">3.1. javascript</a></li>
+<li><a href="#python">3.2. Python</a></li>
+</ul>
+</li>
+<li><a href="#错误码">4. 错误码</a></li>
+<li><a href="#字段缩写对照表">5. 字段缩写对照表</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="接口地址"><a class="anchor" href="#接口地址"></a>1. 接口地址</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>网站：</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.wbfutures.io" class="bare">https://www.wbfutures.io</a></p>
+</li>
+<li>
+<p><a href="https://wbfutures.io" class="bare">https://wbfutures.io</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>API:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://api.wbfutures.pro" class="bare">https://api.wbfutures.pro</a></p>
+</li>
+<li>
+<p>wss://ws.wbfutures.pro, 注意请使用 <a href="https://socket.io/docs/client-api/">socket.io</a> 协议</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>API文档：</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://doc.wbfutures.pro" class="bare">https://doc.wbfutures.pro</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="签名认证"><a class="anchor" href="#签名认证"></a>2. 签名认证</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="申请创建-api-key"><a class="anchor" href="#申请创建-api-key"></a>2.1. 申请创建 API Key</h3>
+<div class="paragraph">
+<p>通过web端页面 创建API Key</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Access Key API 访问密钥</p>
+</li>
+<li>
+<p>Secret Key 签名认证加密所使用的密钥</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="签名说明"><a class="anchor" href="#签名说明"></a>2.2. 签名说明</h3>
+<div class="paragraph">
+<p>API 请求在通过 internet 传输的过程中极有可能被篡改，为了确保请求未被更改，除公共接口（基础信息，行情数据）外的私有接口均必须使用您的 API Key 做签名认证，以校验参数或参数值在传输途中是否发生了更改。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">一个合法的请求由以下几部分组成</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>协议: <code>https</code></p>
+</li>
+<li>
+<p>HOST: <code>api.wbfutures.pro</code></p>
+</li>
+<li>
+<p>接口URL: <code>/api/v1/order</code></p>
+</li>
+<li>
+<p>方法: GET|POST</p>
+</li>
+<li>
+<p>API访问密钥AccessKey：您在Web站点个人中心创建的 API Key 的 Access Key。</p>
+</li>
+<li>
+<p>时间戳expires：您发出请求的时间戳。如：1548311559。在查询请求中包含此值有助于防止第三方截取您的请求。校验一分钟以内合法</p>
+</li>
+<li>
+<p>签名signature：签名计算得出的值，用于确保签名有效和未被篡改。</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+注意：AccessKey，expires， signature三个参数都在请求头中，另外需要设置&#8217;content-type' : 'application/json'`,参考以下实例(对应各自键值)
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">// 请求头必须包含
+var headers = {
+  'content-type' : 'application/json',
+  'apiExpires': expires, //UNIX时间戳以秒为单位校验一分钟以内合法
+  'apiKey': AccessKey, // API 访问密钥（您获取的ApiKey中的AccessKey）
+  'signature': signature // 签名
+};</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="签名步骤"><a class="anchor" href="#签名步骤"></a>2.3. 签名步骤</h3>
+<div class="paragraph">
+<p>因为使用 MD5进行签名计算时，使用不同内容计算得到的结果会完全不同。所以在进行签名计算前，请先对请求进行规范化处理。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>GET</code> 请求将请求参数 <code>json</code> 化，然后 <code>urlEncode</code> , 放在 <code>url</code> 参数后面(?filter=xxxxxxx), data为空字符串</p>
+</li>
+<li>
+<p><code>POST</code> 请求将请求参数 <code>json</code> 化成字符串(字符串不能有空格)</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">GET https://newcoin.io/api/v1/order?filter={"orderId":"11548326910655928"}
+expires = 1583473773431; // new Date().getTime()
+accessKey = c4e516d4-8f42-4c48-bbbe-8d74ad62d45c
+secretKey = d4f74ddd-6875-48b9-827c-49473b80f24d
+
+// 签名数据格式 'apiExpires' + expires +"apiKey" + accessKey + secretKey;
+signatureData = 'apiExpires' + expires +"apiKey" + accessKey + secretKey;
+                   apiExpires1583500117790apiKeyc4e516d4-8f42-4c48-bbbe-8d74ad62d45cd4f74ddd-6875-48b9-827c-49473b80f24d"
+// signatureData = apiExpires1583473773431apiKey78a24e1a77de5c7ac23b948a3f41eba4164220f29534db3384b9a89d0655a226
+
+signature = HEX(MD5(signatureData))
+// signature = 6404770bb5334daea72d5e41722c4504</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="签名失败"><a class="anchor" href="#签名失败"></a>2.4. 签名失败</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>检查 APIKey 是否有效,是否复制正确,是否有绑定 IP 白名单</p>
+</li>
+<li>
+<p>检查时间戳是否是 UTC 当前时间戳，校验一分钟以内合法</p>
+</li>
+<li>
+<p>检查参数签名数据格式是否按('apiExpires' + expires值 + 'apiKey' + accessKey值 + secretKey值)</p>
+</li>
+<li>
+<p>检查编码utf-8</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="代码实例"><a class="anchor" href="#代码实例"></a>3. 代码实例</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="javascript"><a class="anchor" href="#javascript"></a>3.1. javascript</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="javascript" class="language-javascript hljs">&lt;script language="JavaScript"&gt;
+    var request = require("request");
+    var crypto = require("crypto");
+
+    var accessKey = "78a24e1a77de5c7ac23b948a3f41eba4";
+    var secretKey = "164220f29534db3384b9a89d0655a226";
+    var path = "/api/v1/order?filter=%7B%22orderId%22%3A%2211548326910655928%22%7D";
+    var expires = 1583473773431; //new Date().getTime();
+
+    var signature = md5('apiExpires' + expires +"apiKey" + accessKey + secretKey);
+    var headers = {
+        "content-type": "application/json",
+        Accept: "application/json",
+        apiExpires: expires,
+        apikey: accessKey,
+        signature: signature
+    };
+
+    const requestOptions = {
+        headers: headers,
+        url: "xxxx.io" + path,
+        method: verb,
+        body: postBody
+    };
+
+    request(requestOptions, function(error, response, body) {
+        if (error) {
+            console.log(error);
+        }
+        console.log(body);
+    });
+&lt;/script&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="python"><a class="anchor" href="#python"></a>3.2. Python</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="python" class="language-python hljs">import time
+import hashlib
+import hmac
+from urllib.parse import urlparse
+# 签名是 md5('apiExpires' + expires +"apiKey" + accessKey + secretKey)的十六进制编码。
+# verb 必须是大写的，url 是相对的，expires 必须是 unix 时间戳（以秒为单位）
+# 并且数据（如果存在的话）必须是 JSON 格式，并且键值之间没有空格。
+def generate_signature(accessKey, secretKey, expires):
+    """Generate a request signature compatible with cloud."""
+
+    print("Computing md5: %s" % verb + path + str(expires) + data)
+    message = f'apiExpires{expires}apiKey{self.publicKey}{self.privateKey}'
+    md5 = hashlib.md5()
+    md5.update(sign.encode())
+    signature = md5.hexdigest();
+    # print(f'signature:{signature}')
+    # signature = '6404770bb5334daea72d5e41722c4504'
+    return signature
+
+# expires = 1583473773431
+# 或者你可以像以下这样生成:
+# expires = int(round(time.time()) + 5)
+# GET请求将参数json化，然后urlencode, 放在url参数后面(?filter=xxxxxxx), data为空字符串
+# POST请求将参数json化成字符串(字符串不能有空格)，放在data参数的位置
+print(generate_signature('78a24e1a77de5c7ac23b948a3f41eba4', '164220f29534db3384b9a89d0655a226', expires))</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="错误码"><a class="anchor" href="#错误码"></a>4. 错误码</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">编码</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">注释</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">成功</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">账户不存在</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1002</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">合约不存在</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1003</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">应用标识错误</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1004</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托价格不合法</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1005</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托数量不合法</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1006</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托数量超过限制</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1007</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">保证金可用不足</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1008</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">可用数量不足</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1009</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">账户被接管，禁止交易</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1010</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">账户被接管，禁止转出资金</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1011</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">合约禁止交易</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1012</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托方向不合法</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1013</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托类型不合法</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1016</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托数量低于最小委托单位</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1018</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托金额不合法</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1019</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托不存在</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1020</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">对手方没有订单</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1022</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">该笔持仓可平仓数量不足</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1023</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">账户被接管，禁止平仓</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1027</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">合约已经存在</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1028</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托笔数超过限制</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1029</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">持仓数量超过限制</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1031</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">当前合约存在与本次委托的保证金类型不同的持仓</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1032</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">初始保证金率错误</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1035</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">禁止转入转出保证金</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1036</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托价格超过限制</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1037</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托金额超过限制</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1042</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">禁止逐仓开仓</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1044</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">市价委托消耗了过多的流动性档位</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1046</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">当前价格无法成为被动委托，订单将被撤销</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="字段缩写对照表"><a class="anchor" href="#字段缩写对照表"></a>5. 字段缩写对照表</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>为防止数据包过大，返回数据键值进行了压缩，参考下面对应关系</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">{
+    contractId: v.ci,
+    result: {
+        messageType: v.mt,
+        applId: v.ai,
+        contractId: v.ci,
+        symbol: v.sb,
+        tradeDate: v.td,
+        time: v.te,
+        lastPrice: v.lp,
+        matchQty: v.mq,
+        numTrades: v.nt,
+        openPrice: v.op,
+        priceHigh: v.ph,
+        priceLow: v.pl,
+        historyPriceHigh: v.hph,
+        historyPriceLow: v.hpl,
+        totalTurnover: v.tt,
+        totalVolume: v.tv,
+        totalBidVol: v.tbv,
+        totalAskVol: v.tav,
+        prevPrice: v.pp,
+        clearPrice: v.cp,
+        posiVol: v.pv,
+        priceChangeRadio: v.pcr,
+        priceChange: v.pc,
+        lastUpdateId: v.lui,
+        contractStatus: v.cs,
+        deliveryPrice: v.dp,
+        fundingRate: v.fr,
+        predictionFundingRate: v.pfr,
+        premiumIndex: v.pi,
+        predictionPremiumIndex: v.ppi,
+        fairBasis: v.fb,
+        tradingsignal: v.ts,
+        indexPrice: v.ip,
+        signalLevel: v.sl
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.0<br>
+Last updated 2020-03-16 16:45:08 +0800
+</div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+<!-- <script src="tocbot-3.0.2/tocbot.js"></script> -->
+<script src="https://docs.spring.io/spring-boot/docs/current/reference/html/js/tocbot/tocbot.min.js"></script>
+<script src="https://docs.spring.io/spring-boot/docs/current/reference/html/js/toc.js"></script>
+<script>
+    var hs = document.getElementById("header-spring");
+    var h1 = hs.getElementsByTagName("h1")[0];
+    h1.innerHTML = "";
+
+    img = document.createElement("img")
+    img.setAttribute("src","https://www.wbf.info/static/img/1/fb0a0d2f1e6fdae83d3f3a7d8990621d.png")
+    h1.appendChild(img)
+
+</script>
+</body>
+</html>
