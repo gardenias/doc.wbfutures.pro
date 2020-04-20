@@ -86,7 +86,6 @@ div .switch--item:not(:first-child) {
 <li><a href="#查询用户保证金率">5.1. 查询用户保证金率</a></li>
 <li><a href="#查询用户期货参数">5.2. 查询用户期货参数</a></li>
 <li><a href="#可用金额查询">5.3. 可用金额查询</a></li>
-<li><a href="#用户资产划转">5.4. 用户资产划转</a></li>
 </ul>
 </li>
 <li><a href="#models">6. 接口请求与响应数据结构</a>
@@ -1809,78 +1808,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 </div>
-<div class="sect2 transfer">
-<h3 id="用户资产划转"><a class="anchor" href="#用户资产划转"></a>5.4. 用户资产划转</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>POST /api/v1/future/transfer</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="sect3">
-<h4 id="body-parameter-6"><a class="anchor" href="#body-parameter-6"></a>5.4.1. Body Parameter</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 37.5%;">
-<col style="width: 12.5%;">
-<col style="width: 12.5%;">
-<col style="width: 12.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Required</th>
-<th class="tableblock halign-left valign-top">Default</th>
-<th class="tableblock halign-left valign-top">Pattern</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TransferReq</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TransferReq"><em>TransferReq</em></a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="返回值-28"><a class="anchor" href="#返回值-28"></a>5.4.2. 返回值</h4>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 28. http response codes</caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 50%;">
-<col style="width: 16.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Code</th>
-<th class="tableblock halign-left valign-top">Message</th>
-<th class="tableblock halign-left valign-top">Datatype</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Transfer submitted success</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TransferResponse"><em>TransferResponse</em></a></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+
 </div>
 </div>
 <div class="sect1">
