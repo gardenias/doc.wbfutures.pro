@@ -56,6 +56,11 @@ div .switch--item:not(:first-child) {
 </li>
 <li><a href="#错误码">4. 错误码</a></li>
 <li><a href="#字段缩写对照表">5. 字段缩写对照表</a></li>
+<li><a href="#sdk">6. SDK</a>
+<ul class="sectlevel2">
+<li><a href="#python-2">6.1. python</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -151,25 +156,19 @@ div .switch--item:not(:first-child) {
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>协议: <code>https</code></p>
+<p>方法请求地址：如 <a href="https://www.wbfutures.pro/api/v1/future/position" class="bare">https://www.wbfutures.pro/api/v1/future/position</a></p>
 </li>
 <li>
-<p>HOST: <code>api.wbfutures.pro</code></p>
+<p>API访问密钥(apiKey)：您申请的 API Key 中的 Access Key</p>
 </li>
 <li>
-<p>接口URL: <code>/api/v1/order</code></p>
+<p>时间戳(apiExpires)：您发出请求的时间戳，以秒为单位。如：1588262400</p>
 </li>
 <li>
-<p>方法: GET|POST</p>
+<p>签名(signature)：签名计算得出的值，用于确保签名有效和未被篡改</p>
 </li>
 <li>
-<p>API访问密钥AccessKey：您在Web站点个人中心创建的 API Key 的 Access Key。</p>
-</li>
-<li>
-<p>时间戳expires：您发出请求的时间戳。如：1548311559。在查询请求中包含此值有助于防止第三方截取您的请求。校验一分钟以内合法</p>
-</li>
-<li>
-<p>签名signature：签名计算得出的值，用于确保签名有效和未被篡改。</p>
+<p>必选和可选参数：每个方法都有一组用于定义 API 调用的必需参数和可选参数。GET和POST请求的参数都不参与签名。</p>
 </li>
 </ol>
 </div>
@@ -184,7 +183,7 @@ div .switch--item:not(:first-child) {
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-注意：AccessKey，expires， signature三个参数都在请求头中，另外需要设置&#8217;content-type' : 'application/json'`,参考以下实例(对应各自键值)
+注意：apiKey，apiExpires， signature三个参数都在请求头中，，另外需要设置&#8217;content-type' : 'application/json'`,参考以下实例(对应各自键值)
 </td>
 </tr>
 </table>
@@ -204,32 +203,101 @@ var headers = {
 <div class="sect2">
 <h3 id="签名步骤"><a class="anchor" href="#签名步骤"></a>2.3. 签名步骤</h3>
 <div class="paragraph">
-<p>因为使用 MD5进行签名计算时，使用不同内容计算得到的结果会完全不同。所以在进行签名计算前，请先对请求进行规范化处理。</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>GET</code> 请求将请求参数 <code>json</code> 化，然后 <code>urlEncode</code> , 放在 <code>url</code> 参数后面(?filter=xxxxxxx), data为空字符串</p>
-</li>
-<li>
-<p><code>POST</code> 请求将请求参数 <code>json</code> 化成字符串(字符串不能有空格)</p>
-</li>
-</ol>
+<p>假设您创建的API Key 如下：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">GET https://api.wbfutures.pro/api/v1/order?filter={"orderId":"11548326910655928"}
-expires = 1583473773431; // new Date().getTime()
-accessKey = c4e516d4-8f42-4c48-bbbe-8d74ad62d45c
-secretKey = d4f74ddd-6875-48b9-827c-49473b80f24d
-
-// 签名数据格式 'apiExpires' + expires +"apiKey" + accessKey + secretKey;
-signatureData = 'apiExpires' + expires +"apiKey" + accessKey + secretKey;
-                   apiExpires1583500117790apiKeyc4e516d4-8f42-4c48-bbbe-8d74ad62d45cd4f74ddd-6875-48b9-827c-49473b80f24d"
-// signatureData = apiExpires1583473773431apiKey78a24e1a77de5c7ac23b948a3f41eba4164220f29534db3384b9a89d0655a226
-
-signature = HEX(MD5(signatureData))
-// signature = 6404770bb5334daea72d5e41722c4504</code></pre>
+<pre class="highlightjs highlight"><code class="language-none hljs">Access Key = w3xxxxxx-19xxxxxx-25xxxxxx-3xxxx
+Secret Key = aaxxxxxx-63xxxxxx-57xxxxxx-1xxxx</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>您发起请求时，</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">时间戳  = 1588262400</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>在进行签名计算前，请先对参数规范化处理</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">  apiKey：w3xxxxxx-19xxxxxx-25xxxxxx-3xxxx
+  apiExpires：1588262400</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>按照ASCII码的顺序对apiKey, apiExpires 两个参数进行升序排序</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">  apiExpires：1588262400
+  apiKey：w3xxxxxx-19xxxxxx-25xxxxxx-3xxxx</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>排序后的参数按照“keyvalue”的格式拼接在一起</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">  apiExpires1588262400apiKeyw3xxxxxx-19xxxxxx-25xxxxxx-3xxxx</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>将Secret Key拼接到上一步字符串末尾，作为签名字符串</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">  apiExpires1588262400apiKeyw3xxxxxx-19xxxxxx-25xxxxxx-3xxxxaaxxxxxx-63xxxxxx-57xxxxxx-1xxxx</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>使用MD5对签名字符串求签名得到signature</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">  md5(apiExpires1588262400apiKeyw3xxxxxx-19xxxxxx-25xxxxxx-3xxxxaaxxxxxx-63xxxxxx-57xxxxxx-1xxxx)
+  = q8xxxxxx-49xxxxxx-05xxxxxx-6xxxx</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>最终签名认证请求的请求头，如下示例</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">  // 请求头必须包含
+  var headers = {
+    'content-type' : 'application/json',
+    'apiExpires': 1588262400, //UNIX时间戳以秒为单位
+    'apiKey': 'w3xxxxxx-19xxxxxx-25xxxxxx-3xxxx', // API访问密钥
+    'signature': 'q8xxxxxx-49xxxxxx-05xxxxxx-6xxxx' // 签名
+  };</code></pre>
 </div>
 </div>
 </div>
@@ -311,7 +379,7 @@ def generate_signature(accessKey, secretKey, expires):
     """Generate a request signature compatible with cloud."""
 
     print("Computing md5: %s" % verb + path + str(expires) + data)
-    message = f'apiExpires{expires}apiKey{self.publicKey}{self.privateKey}'
+    message = f'apiExpires{expires}apiKey{self.accessKey}{self.secretKey}'
     md5 = hashlib.md5()
     md5.update(sign.encode())
     signature = md5.hexdigest();
@@ -522,11 +590,528 @@ print(generate_signature('78a24e1a77de5c7ac23b948a3f41eba4', '164220f29534db3384
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="sdk"><a class="anchor" href="#sdk"></a>6. SDK</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="python-2"><a class="anchor" href="#python-2"></a>6.1. python</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="python" class="language-python hljs">#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#auther: Rexxar
+
+import socketio
+import os
+import time
+import hashlib
+import hmac
+import urllib
+import threading
+import requests
+import json
+
+
+class SDK():
+
+
+    def __init__(self,config):
+        '''初始化'''
+        self.publicKey = config['apiKey']
+        self.privateKey = config['secretKey']
+        self.baseWsUrl = 'wss://ws.wbfutures.pro'
+        self.baseRsUrl = 'https://www.wbfutures.pro/api'
+        self.status = False  #websocket连接闸口
+
+        self._setWebsocket() #连接websocket
+        process = threading.Thread(target=self._ping) #建立心跳
+        process.start()
+        while not self.status:
+            continue
+
+    def _signature(self):
+        '''签名'''
+        expires = int(time.time()+5)   #timestamp
+        sign = f'apiExpires{expires}apiKey{self.publicKey}{self.privateKey}'
+        m = hashlib.md5()
+        m.update(sign.encode())
+        signature = m.hexdigest()
+        return signature,expires
+
+
+    def _getUrl(self,method,params=None):
+        '''生成url'''
+        baseRsUrl = self.baseRsUrl
+        method,path = method.split(' ')
+        req = {}
+        signature,expires = self._signature() #拿到签名
+
+        '''===判断参数结构==='''
+        if (params is not None) and ('filter' in params):
+            req = {'filter':json.dumps(params['filter'])}
+        elif params is not None:
+            for k in params:
+                if params[k] is not None:
+                    req[k] = params[k]
+        req = urllib.parse.urlencode(req)
+
+        '''===生成Url==='''
+        if req=='':
+            url = f'{baseRsUrl}{path}'
+        else:
+            url = f'{baseRsUrl}{path}?{req}'
+        return url,signature,expires
+
+
+    def _httpReq(self,method,params=None,body=None):
+        '''请求'''
+        url,signature,expires = self._getUrl(method,params)
+        method = method.split(' ')[0]
+        headers = {'content-type':'application/json',
+                   'Accept':'application/json',
+                   'apiExpires':str(expires),
+                   'apiKey':self.publicKey,
+                   'signature':signature}
+        print(f'method:{method}')
+        print(f'url:{url}')
+
+        '''===不同请求方法==='''
+        if method=='GET':
+            res = requests.get(url,headers=headers)
+        elif method=='POST':
+            if body is not None:
+                res = requests.post(url,headers=headers,data=body)
+            else:
+                res = requests.post(url,headers=headers)
+        elif method=='DELETE':
+            res = requests.delete(url,headers=headers)
+        rsp = res.json()
+        return rsp
+
+
+    def _setWebsocket(self):
+        '''配置websocket 自动重连'''
+        sio = socketio.Client()
+        @sio.event
+        def connect():
+            print('===WBF Websocket Server Connected!===')
+            signature,expires = self._signature()
+            auth = ['auth',{'header':{'type':1001},'body':{'apiKey':self.publicKey,'expires':expires,'signature':signature}}]
+            print(auth)
+            sio.emit(auth[0],auth[1]) #鉴权
+        @sio.event
+        def disconnect():
+            print("===WBF Websocket Server Disconnected!===")
+        @sio.on('auth')
+        def rsp(data):
+            situation = data['body']['msg']
+            print(data)
+            if situation=='success':
+                print('===WBF Account Authentication Successfully===')
+                self.status = True
+            else:
+                raise Exception(f"===WBF Account Authentication Failed!!===\nerror: {situation}")
+        sio.connect(self.baseWsUrl) #连接websocket
+        self.sio = sio #websocket实例
+
+
+    def _ping(self):
+        '''心跳发送 保持连接状态'''
+        try:
+            sio = self.sio
+            t=0
+            while t&lt;=10:
+                if t==10:
+                    sio.emit('ping')
+                    t=0
+                time.sleep(1)
+                t+=1
+        except:
+            time.sleep(5)
+
+
+    ''' ==========================================================================='''
+    '''============================ Websocket Function ============================'''
+    '''============================================================================'''
+
+    def subBase(self,func):
+        '''订阅基本信息'''
+        sio = self.sio
+        req = {'header':{'type':1003},
+               'body':{'topics':[
+               {'topic':'match'}]}}
+        print(req['body']['topics'][0])
+        sio.emit('subscribe',req)
+        sio.on('match',func)
+
+
+    def subKline(self,symbol,period,func):
+        '''订阅K线'''
+        sio = self.sio
+        periodDic={'1m':'60000','3m':'180000','5m':'300000',
+                   '15m':'900000','30m':'1800000','1h':'3600000',
+                   '2h':'7200000','4h':'14400000','6h':'21600000',
+                   '12h':'43200000','1d':'86400000','1w':'604800000'}
+        period = periodDic[period]
+        req = {'header':{'type':1003},
+               'body':{'topics':[
+               {'topic':'future_kline','params':{'symbols':[
+               {'symbol':symbol,
+                'ranges':[period]}]}}]}}
+        print(req['body']['topics'][0])
+        sio.emit('subscribe',req)
+        sio.on('future_kline',func)
+
+
+    def subLegalCoin(self,func):
+        '''订阅法币'''
+        sio = self.sio
+        req = {'header':{'type':1003},
+               'body':{'topics':[
+               {'topic':'exchange'}]}}
+        print(req['body']['topics'][0])
+        sio.emit('subscribe',req)
+        sio.on('exchange',func)
+
+
+    def subMarket(self,func):
+        '''订阅市场数据'''
+        sio = self.sio
+        req = {'header':{'type':1003},
+               'body':{'topics':[
+               {'topic':'future_market_stat'}]}}
+        print(req['body']['topics'][0])
+        sio.emit('subscribe',req)
+        sio.on('future_market_stat',func)
+
+
+    def subCoinPrice(self,func):
+        '''订阅币价'''
+        sio = self.sio
+        req = {'header':{'type':1003},
+               'body':{'topics':[
+               {'topic':'coin_price'}]}}
+        print(req['body']['topics'][0])
+        sio.emit('subscribe',req)
+        sio.on('coin_price',func)
+
+
+    def subMarketQuote(self,symbol,func):
+        '''订阅市场quote'''
+        sio = self.sio
+        req = {'header':{'type':1003},
+               'body':{'topics':[
+               {'topic':'future_all_indicator',
+                'params':{'symbols':[{'symbol':symbol}]}}]}}
+        print(req['body']['topics'][0])
+        sio.emit('subscribe',req)
+        sio.on('future_all_indicator',func)
+
+
+    def subRealtime(self,func):
+        sio = self.sio
+        req = {'header':{'type':1003},
+               'body':{'topics':[
+               {'topic':'realtime'}]}}
+        print(req['body']['topics'][0])
+        sio.emit('subscribe',req)
+        sio.on('realtime',func)
+
+
+    def subDepth(self,symbol,func):
+        '''订阅深度'''
+        sio = self.sio
+        req = {'header':{'type':1003},
+               'body':{'topics':[
+               {'topic':'future_snapshot_depth','params':{'symbols':[
+               {'symbol':symbol}]}}]}}
+        print(req['body']['topics'][0])
+        sio.emit('subscribe',req)
+        sio.on('future_snapshot_depth',func)
+
+
+    def subQuote(self,symbol,func):
+        sio = self.sio
+        req = {'header':{'type':1003},
+               'body':{'topics':[
+               {'topic':'future_snapshot_indicator','params':{'symbols':[
+               {'symbol':symbol}]}}]}}
+        print(req['body']['topics'][0])
+        sio.emit('subscribe',req)
+        sio.on('future_snapshot_indicator',func)
+
+
+    def subTick(self,symbol,func):
+        '''订阅tick'''
+        sio = self.sio
+        req = {'header':{'type':1003},
+               'body':{'topics':[
+               {'topic':'future_tick','params':{'symbols':[
+               {'symbol':symbol}]}}]}}
+        print(req)
+        print(req['body']['topics'][0])
+        sio.emit('subscribe',req)
+        sio.on('future_tick',func)
+
+
+    def subNotice(self,func):
+        sio = self.sio
+        req = {'header':{'type':1003},
+               'body':{'topics':[
+               {'topic':'notice'}]}}
+        print(req['body']['topics'][0])
+        sio.emit('subscribe',req)
+        sio.on('notice',func)
+
+
+    ''' ==========================================================================='''
+    '''============================ Restful Function ============================'''
+    '''============================================================================'''
+
+    def getCoinPrice(self):
+        req = 'GET /api/v1/common/exchange/coins'
+        data = self._httpReq(req)
+        return data
+
+
+    def getContract(self):
+        req = 'GET /api/v1/future/queryContract'
+        data = self._httpReq(req)
+        return data
+
+
+    def getCurrency(self):
+        req = 'GET /api/v1/common/queryCurrency'
+        data = self._httpReq(req)
+        return data
+
+
+    def getTradeCoin(self):
+        req = 'GET /api/v1/common/exchange/list'
+        data = self._httpReq(req)
+        return data
+
+    def getLegalCoin(self):
+        req = 'GET /api/v1/common/exchange/list'
+        data = self._httpReq(req)
+        return data
+
+
+    def getHistoryDelivery(self,type=2,pageNum=None,pageSize=None,contractId=None,sort=None):
+        req = 'GET /api/v1/future/queryContractDeliveryList'
+        data = self._httpReq(req,self._getUrl(req,params={'type':type,'pageNum':pageNum,
+                                                          'pageSize':pageSize,'contractId':contractId,
+                                                          'sort':sort}))
+        return data
+
+
+    def getAccount(self):
+        req = 'GET /api/v1/future/user'
+        data = self._httpReq(req,self._getUrl(req))
+        return data
+
+
+    def getBalance(self):
+        '''获取资产'''
+        req = 'GET /api/v1/future/margin'
+        data = self._httpReq(req)
+        return data
+
+
+    def getMarginRate(self):
+        req = 'GET /api/v1/future/queryAccountMarginRate'
+        data = self._httpReq(req)
+        return data
+
+
+    def getUserParam(self,contractId):
+        req = 'GET /api/v1/future/queryUserFutureParam'
+        data = self._httpReq(req,params={'filter':{'contractId':contractId}})
+        return data
+
+
+    def getPosition(self):
+        '''获取仓位'''
+        req = 'GET /api/v1/future/position'
+        data = self._httpReq(req)
+        return data
+
+
+    def getMargin(self,varietyId,contractId):
+        req = 'GET /api/v1/future/queryVarietyMargin'
+        data = self._httpReq(req,params={'filter':{'varietyId':varietyId,
+                                         'contractId':contractId}})
+        # data = self._httpReq(req,params={'varietyId':varietyId,'contractId':contractId})
+        return data
+
+
+    def makeOrder(self,side,quantity,price=None,orderType=1,positionEffect=1,marginType=1,marginRate=0,symbol=None,contractId=None,clientOrderId=None):
+        '''下单'''
+        req = 'POST /api/v1/future/order'
+        body = {'side':side,'quantity':str(quantity),'orderType':orderType,'positionEffect':positionEffect,
+                'marginType':marginType,'marginRate':str(marginRate)}
+
+        extraKey = ['price','symbol','contractId']
+        extra = [str(price),symbol,contractId]
+        for i,e in enumerate(extra):
+            if (e is not None) and (e != 'None'):
+                body[extraKey[i]] = e
+        print(body)
+        data = self._httpReq(req,body=json.dumps(body,separators=(',',':')))
+        return data
+
+
+    def makeOrders(self,side,quantity,price,orderType=1,positionEffect=1,marginType=1,marginRate=0,symbol=None,contractId=None,clientOrderId=None):
+        '''批量下单'''
+        req = 'POST /api/v1/future/orders'
+        body = {'orders':[{'side':side[i],'orderQty':str(quantity[i]),'orderType':orderType,'positionEffect':positionEffect,
+                           'marginType':marginType,'orderPrice':str(price[i]),'contractId':contractId} for i in range(len(side))]}
+
+        print(body)
+        data = self._httpReq(req,body=json.dumps(body,separators=(',',':')))
+        return data
+
+
+    def cancelOrder(self,contractId,orderId):
+        '''撤单'''
+        req = 'DELETE /api/v1/future/order'
+        data = self._httpReq(req,params={'filter':{'contractId':contractId,
+                                                   'originalOrderId':str(orderId)}})
+        return data
+
+    def cancelAll(self):
+        '''全撤'''
+        req = 'DELETE /api/v1/future/order/all'
+        data = self._httpReq(req)
+        return data
+
+
+    def queryOrder(self,orderId):
+        '''查询订单'''
+        req = 'GET /api/v1/future/order'
+        data = self._httpReq(req,params={'filter':{'orderId':str(orderId)}})
+        # data = self._httpReq(req,params={'orderId':str(orderId)})
+        return data
+
+    def queryOrders(self,orderIdList):
+        req = 'GET /api/v1/future/orders'
+        data = self._httpReq(req,params={'filter':{'orderId':[str(i) for i in orderIdList]}})
+        return data
+
+
+    def getOrderList(self):
+        '''当前订单'''
+        req = 'GET /api/v1/future/queryActiveOrder'
+        data = self._httpReq(req)
+        return data
+
+
+    def getOrders(self):
+        req = 'GET /api/v1/future/queryHisOrder'
+        data = self._httpReq(req)
+        return data
+
+
+    def changeMargin(self,contractId,margin):
+        req = 'POST /api/v1/future/position/transferMargin'
+        body = {'contractId':contractId,'margin':str(margin)}
+        # data = self._httpReq(req,params={'filter':body})
+        data = self._httpReq(req,body=json.dumps(body,separators=(',',':')))
+        return data
+
+
+    def changeMarginType(self,contractId,initMarginRate,marginType):
+        req = 'POST /api/v1/future/position/isolate'
+        body = {'contractId':contractId,'initMarginRate':str(initMarginRate),'marginType':marginType}
+        # data = self._httpReq(req,params={'filter':body})
+        data = self._httpReq(req,body=json.dumps(body,separators=(',',':')))
+        return data
+
+
+    def transfer(self,currencyId,amount,transferType):
+        req = 'POST /api/v1/future/transfer'
+        body = {'currencyId':currencyId,'amount':amount,'transferType':transferType}
+        data = self._httpReq(req,body=json.dumps(body,separators=(',',':')))
+        return data
+
+
+    def getForceLower(self):
+        req = 'GET /api/v1/future/queryForceLower'
+        data = self._httpReq(req)
+        return data
+
+
+    def getDeals(self):
+        '''历史成交'''
+        req = 'GET /api/v1/future/queryHisMatch'
+        data = self._httpReq(req)
+        return data
+
+
+    def getMarketStats(self,contractId):
+        req = 'GET /api​/v1​/futureQuot​/queryMarketStat'
+        data = self._httpReq(req,params={'contractId':contractId})
+        # data = self._httpReq(req,params={'filter':{'contractId':contractId}})
+        return data
+
+    def getQuote(self,contractId):
+        req = 'GET /api/v1/futureQuot/querySnapshot'
+        data = self._httpReq(req,params={'contractId':contractId})
+        return data
+
+    def getQuotes(self):
+        req = 'GET /api/v1/futureQuot/queryIndicatorList'
+        data = self._httpReq(req)
+        return data
+
+    def getKline(self,contractId,period):
+        req = 'GET /api/v1/futureQuot/queryCandlestick'
+        params = {'contractId':contractId,'range':period}
+        print(params)
+        data = self._httpReq(req,params=params)
+        return data
+
+    def getTick(self,contractId):
+        req = 'GET /api/v1/futureQuot/queryTickTrade'
+        data = self._httpReq(req,params={'contractId':contractId})
+        return data
+
+
+if __name__ == '__main__':
+    config = {'apiKey':'*******',
+              'secretKey':'******'}
+    task = SDK(config)
+    contractId = 100000
+
+    '''======restful========'''
+    data = task.getDeals()
+    print(data)
+
+
+    '''======websocket======'''
+    # def handle(content):
+    #     print(content)
+    # task.subBase(handle)
+    # task.subKline(contractId,'1m',handle)
+    # task.subLegalCoin(handle)
+    # task.subMarket(handle)
+    # task.subCoinPrice(handle)
+    # task.subMarketQuote(contractId,handle)
+    # task.subRealtime(handle)
+    # task.subDepth(contractId,handle)
+    # task.subTick(contractId,handle)
+    # task.subQuote(contractId,handle)
+    # task.subNotice(handle)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2020-03-23 14:35:48 +0800
+Last updated 2020-05-15 19:09:19 +0800
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
