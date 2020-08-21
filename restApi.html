@@ -1996,9 +1996,21 @@ div .switch--item:not(:first-child) {
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List  of <a href="#string">[string]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of [成功结果[客户端委托ID, 订单委托Id], 失败结果[客户端ID, 订单ID]]</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{
+   	'code': 0,
+   	'msg': 'success',
+   	'data': {
+   		'succ': [
+   			['60fe4e88b4cb450c9710be2f801897b7', '11588836983942258'],
+   			['9119b1a42f604c5892097b76e1c108d5', '11588836983942307']
+   		],
+   		'reject': [
+   		  ['6004705ca6cb4647bedb72d86e6155a0', '11588836983942259']
+   		]
+   	}
+   }</p></td>
 </tr>
 </tbody>
 </table>
@@ -2057,7 +2069,7 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">clientOrderId</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">客户端委托ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">客户端委托ID, 最大32位，包含数字大小写字母, 中横线, 下划线</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -3063,6 +3075,13 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">regularSettlementTime</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">定期结算时间（股指合约结算的相对时间）</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">createTime</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
@@ -3336,7 +3355,7 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">initMarginRate</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">保证金初始值</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">初始保证金率</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -3468,7 +3487,7 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">arginRate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">marginRate</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">保证金率</p></td>
@@ -3759,7 +3778,7 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">orderSubType</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">委托子类型, 0-默认委托；1-被动委托；2-最近价触发条件委托；3-指数触发 4-标记价触发条件委托</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托sub类型</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
@@ -3977,7 +3996,7 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">orderSubType</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">委托子类型, 0-默认委托；1-被动委托；2-最近价触发条件委托；3-指数触发 4-标记价触发条件委托</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托子类型, 1-被动委托；2-最近价触发条件委托；3-指数触发</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
@@ -3993,6 +4012,13 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">止损止盈价</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stopCondition</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">止损止盈标志，0-默认；1-止盈；2-止损</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">orderStatus</p></td>
@@ -4165,7 +4191,7 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">clientOrderId</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">客户端委托ID,如果不传使用uuid</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">客户端委托ID, 最大32位，包含数字大小写字母, 中横线, 下划线</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -4899,7 +4925,7 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">margin</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">保证金调整额度（大于0 : 增加保证金，小于0 ：减少保证金）</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">保证金调整额度（&gt;0 : 增加保证金，-0 ：减少保证金）</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
@@ -4987,7 +5013,7 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">transferType</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">future-to-spot:期货账户到现货划转; spot-to-future:现货账户到期货划转;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- &amp;quot;future-to-spot:期货账户到现货划转&amp;quot; - &amp;quot;spot-to-future:现货账户到期货划转&amp;quot;</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
@@ -5111,7 +5137,7 @@ div .switch--item:not(:first-child) {
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2020-06-10 10:23:17 +0800
+Last updated 2020-08-21 18:42:36 +0800
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
