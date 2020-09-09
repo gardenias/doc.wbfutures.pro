@@ -1996,17 +1996,17 @@ div .switch--item:not(:first-child) {
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List of [成功结果[客户端ID, 订单ID], 失败结果[客户端ID, 订单ID]]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of [成功结果[客户端ID, 订单ID], 失败结果[客户端ID, 错误码]]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">{
-     	'code': 0,
-     	'msg': 'success',
-     	'data': {
-     		'succ': [
-     			['60fe4e88b4cb450c9710be2f801897b7', '11588836983942258'],
-     			['9119b1a42f604c5892097b76e1c108d5', '11588836983942307']
+     	"code": 0,
+     	"msg": "success",
+     	"data": {
+     		"succ": [
+     			["60fe4e88b4cb450c9710be2f801897b7", "11588836983942258"],
+     			["9119b1a42f604c5892097b76e1c108d5", '"1588836983942307"]
      		],
-     		'reject': [
-     		  ['6004705ca6cb4647bedb72d86e6155a0', '11588836983942259']
+     		"reject": [
+     		  ["6004705ca6cb4647bedb72d86e6155a0", "1019"]
      		]
      	}
      }</p></td>
@@ -5144,7 +5144,7 @@ div .switch--item:not(:first-child) {
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2020-09-03 17:33:24 +0800
+Last updated 2020-09-09 19:38:48 +0800
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
