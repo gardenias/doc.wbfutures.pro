@@ -10,23 +10,24 @@
 @import url("https://docs.spring.io/spring-boot/docs/current/reference/html/css/spring.css");
 
 div .switch {
-    margin-left: 8px;
-    border-color: #406A2A;
-    border-radius: 4px 4px 0 0;
+  margin-left: 8px;
+  border-color: #406A2A;
+  border-radius: 4px 4px 0 0;
 }
 
 div .switch--item {
-    color: #406A2A;
-    background-color: transparent;
+  color: #406A2A;
+  background-color: transparent;
 }
 
 div .switch--item.selected {
-    background-color: #406A2A;
+  background-color: #406A2A;
 }
 
 div .switch--item:not(:first-child) {
-    border-color: #406A2A;
+  border-color: #406A2A;
 }
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -43,7 +44,7 @@ div .switch--item:not(:first-child) {
 <li><a href="#签名认证">2. 签名认证</a>
 <ul class="sectlevel2">
 <li><a href="#申请创建-api-key">2.1. 申请创建 API Key</a></li>
-<li><a href="#签名说明">2.2. 签名说明</a></li>
+<li><a href="#签名说明-api-请求在通过-internet-传输的过程中极有可能被篡改为了确保请求未被更改除公共接口基础信息行情数据外的私有接口均必须使用您的-api-key-做签名认证以校验参数或参数值在传输途中是否发生了更改">2.2. 签名说明 API 请求在通过 internet 传输的过程中极有可能被篡改，为了确保请求未被更改，除公共接口（基础信息，行情数据）外的私有接口均必须使用您的 API Key 做签名认证，以校验参数或参数值在传输途中是否发生了更改。</a></li>
 <li><a href="#签名步骤">2.3. 签名步骤</a></li>
 <li><a href="#签名失败">2.4. 签名失败</a></li>
 </ul>
@@ -90,16 +91,10 @@ div .switch--item:not(:first-child) {
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://api.wbfutures.pro" class="bare">https://api.wbfutures.pro</a></p>
+<p><a href="https://api.wbfutures.io" class="bare">https://api.wbfutures.io</a></p>
 </li>
 <li>
-<p><a href="https://api.wbfutures.pro/hybrid" class="bare">https://api.wbfutures.pro/hybrid</a> (全币种合约)</p>
-</li>
-<li>
-<p><a href="https://api.wbfutures.pro/coin" class="bare">https://api.wbfutures.pro/coin</a> (币本位合约)</p>
-</li>
-<li>
-<p>wss://ws.wbfutures.pro [注意请使用 <a href="https://socket.io/docs/client-api/">socket.io</a> 协议]</p>
+<p>wss://ws.wbfutures.io [注意请使用 <a href="https://socket.io/docs/client-api/">socket.io</a> 协议]</p>
 </li>
 </ul>
 </div>
@@ -109,7 +104,7 @@ div .switch--item:not(:first-child) {
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://doc.wbfutures.pro" class="bare">https://doc.wbfutures.pro</a></p>
+<p><a href="https://doc.wbfutures.io" class="bare">https://doc.wbfutures.io</a></p>
 </li>
 </ul>
 </div>
@@ -142,10 +137,7 @@ div .switch--item:not(:first-child) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="签名说明"><a class="anchor" href="#签名说明"></a>2.2. 签名说明</h3>
-<div class="paragraph">
-<p>API 请求在通过 internet 传输的过程中极有可能被篡改，为了确保请求未被更改，除公共接口（基础信息，行情数据）外的私有接口均必须使用您的 API Key 做签名认证，以校验参数或参数值在传输途中是否发生了更改。</p>
-</div>
+<h3 id="签名说明-api-请求在通过-internet-传输的过程中极有可能被篡改为了确保请求未被更改除公共接口基础信息行情数据外的私有接口均必须使用您的-api-key-做签名认证以校验参数或参数值在传输途中是否发生了更改"><a class="anchor" href="#签名说明-api-请求在通过-internet-传输的过程中极有可能被篡改为了确保请求未被更改除公共接口基础信息行情数据外的私有接口均必须使用您的-api-key-做签名认证以校验参数或参数值在传输途中是否发生了更改"></a>2.2. 签名说明 API 请求在通过 internet 传输的过程中极有可能被篡改，为了确保请求未被更改，除公共接口（基础信息，行情数据）外的私有接口均必须使用您的 API Key 做签名认证，以校验参数或参数值在传输途中是否发生了更改。</h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -160,7 +152,7 @@ div .switch--item:not(:first-child) {
 <p>协议: <code>https</code></p>
 </li>
 <li>
-<p>HOST: <code>api.wbfutures.pro</code></p>
+<p>HOST: <code>api.wbfutures.io</code></p>
 </li>
 <li>
 <p>接口URL: <code>/api/v1/order</code></p>
@@ -224,7 +216,7 @@ var headers = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">GET https://api.wbfutures.pro/api/v1/order?filter={"orderId":"11548326910655928"}
+<pre class="highlightjs highlight"><code data-lang="js" class="language-js hljs">GET https://api.wbfutures.io/api/v1/order?filter={"orderId":"11548326910655928"}
 expires = 1583473773431; // new Date().getTime()
 accessKey = c4e516d4-8f42-4c48-bbbe-8d74ad62d45c
 secretKey = d4f74ddd-6875-48b9-827c-49473b80f24d
@@ -532,23 +524,24 @@ print(generate_signature('78a24e1a77de5c7ac23b948a3f41eba4', '164220f29534db3384
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2020-09-02 17:48:48 +0800
+Last updated 2021-04-15 16:57:29 +0800
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
 <script>hljs.initHighlighting()</script>
 <!-- <script src="tocbot-3.0.2/tocbot.js"></script> -->
-<script src="https://docs.spring.io/spring-boot/docs/current/reference/html/js/tocbot/tocbot.min.js"></script>
+<script
+    src="https://docs.spring.io/spring-boot/docs/current/reference/html/js/tocbot/tocbot.min.js"></script>
 <script src="https://docs.spring.io/spring-boot/docs/current/reference/html/js/toc.js"></script>
 <script>
-    var hs = document.getElementById("header-spring");
-    var h1 = hs.getElementsByTagName("h1")[0];
-    h1.innerHTML = "";
+  var hs = document.getElementById("header-spring");
+  var h1 = hs.getElementsByTagName("h1")[0];
+  h1.innerHTML = "";
 
-    img = document.createElement("img")
-    img.setAttribute("src", "images/wbf.png")
-    h1.appendChild(img)
+  img = document.createElement("img")
+  img.setAttribute("src", "images/wbf.png")
+  h1.appendChild(img)
 
 </script>
 </body>

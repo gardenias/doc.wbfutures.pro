@@ -12,23 +12,24 @@
 @import url("https://docs.spring.io/spring-boot/docs/current/reference/html/css/spring.css");
 
 div .switch {
-    margin-left: 8px;
-    border-color: #406A2A;
-    border-radius: 4px 4px 0 0;
+  margin-left: 8px;
+  border-color: #406A2A;
+  border-radius: 4px 4px 0 0;
 }
 
 div .switch--item {
-    color: #406A2A;
-    background-color: transparent;
+  color: #406A2A;
+  background-color: transparent;
 }
 
 div .switch--item.selected {
-    background-color: #406A2A;
+  background-color: #406A2A;
 }
 
 div .switch--item:not(:first-child) {
-    border-color: #406A2A;
+  border-color: #406A2A;
 }
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -43,9 +44,11 @@ div .switch--item:not(:first-child) {
 <ul class="sectlevel1">
 <li><a href="#基础信息">1. 基础信息</a>
 <ul class="sectlevel2">
-<li><a href="#获取币种信息">1.1. 获取币种信息</a></li>
-<li><a href="#查询可用的期货-品种">1.2. 查询可用的期货-品种</a></li>
-<li><a href="#查询品种保证金梯度">1.3. 查询品种保证金梯度</a></li>
+<li><a href="#获取计价货币的usd价格">1.1. 获取计价货币的USD价格</a></li>
+<li><a href="#获取交易币种">1.2. 获取交易币种</a></li>
+<li><a href="#获取币种信息">1.3. 获取币种信息</a></li>
+<li><a href="#查询可用的期货-品种">1.4. 查询可用的期货-品种</a></li>
+<li><a href="#查询品种保证金梯度">1.5. 查询品种保证金梯度</a></li>
 </ul>
 </li>
 <li><a href="#行情数据">2. 行情数据</a>
@@ -72,17 +75,18 @@ div .switch--item:not(:first-child) {
 <li><a href="#批量撤单">4.4. 批量撤单</a></li>
 <li><a href="#获取多个订单">4.5. 获取多个订单</a></li>
 <li><a href="#下单">4.6. 下单</a></li>
-<li><a href="#用户当前委托查询">4.7. 用户当前委托查询</a></li>
+<li><a href="#当前用户的委托查询">4.7. 当前用户的委托查询</a></li>
 <li><a href="#查询用户在adl中的排名">4.8. 查询用户在ADL中的排名</a></li>
-<li><a href="#历史委托查询">4.9. 历史委托查询</a></li>
-<li><a href="#获取单个订单">4.10. 获取单个订单</a></li>
+<li><a href="#最新成交查询">4.9. 最新成交查询</a></li>
+<li><a href="#最新成交查询-2">4.10. 最新成交查询</a></li>
+<li><a href="#获取单个订单">4.11. 获取单个订单</a></li>
 </ul>
 </li>
 <li><a href="#账户相关">5. 账户相关</a>
 <ul class="sectlevel2">
 <li><a href="#查询用户保证金率">5.1. 查询用户保证金率</a></li>
 <li><a href="#查询用户期货参数">5.2. 查询用户期货参数</a></li>
-<li><a href="#用户资产查询">5.3. 用户资产查询</a></li>
+<li><a href="#可用金额查询">5.3. 可用金额查询</a></li>
 <li><a href="#用户资产划转">5.4. 用户资产划转</a></li>
 </ul>
 </li>
@@ -110,41 +114,45 @@ div .switch--item:not(:first-child) {
 <li><a href="#ContractInfoVo">6.20. <em>ContractInfoVo</em></a></li>
 <li><a href="#ContractPageableFilter">6.21. <em>ContractPageableFilter</em></a></li>
 <li><a href="#CurrencyPriceVo">6.22. <em>CurrencyPriceVo</em></a></li>
-<li><a href="#CurrencyVo">6.23. <em>CurrencyVo</em></a></li>
-<li><a href="#CurrencyVoResult">6.24. <em>CurrencyVoResult</em></a></li>
-<li><a href="#ForceLowerResponse">6.25. <em>ForceLowerResponse</em></a></li>
-<li><a href="#ForceLowerVo">6.26. <em>ForceLowerVo</em></a></li>
-<li><a href="#FutureVarietyPo">6.27. <em>FutureVarietyPo</em></a></li>
-<li><a href="#Indicator">6.28. <em>Indicator</em></a></li>
-<li><a href="#IsolateReq">6.29. <em>IsolateReq</em></a></li>
-<li><a href="#IsolateResponse">6.30. <em>IsolateResponse</em></a></li>
-<li><a href="#MarginRateResponse">6.31. <em>MarginRateResponse</em></a></li>
-<li><a href="#MarginRateVo">6.32. <em>MarginRateVo</em></a></li>
-<li><a href="#MarketStatVo">6.33. <em>MarketStatVo</em></a></li>
-<li><a href="#MarketStatVoResponse">6.34. <em>MarketStatVoResponse</em></a></li>
-<li><a href="#MatchVoResponse">6.35. <em>MatchVoResponse</em></a></li>
-<li><a href="#OrderDto">6.36. <em>OrderDto</em></a></li>
-<li><a href="#OrderDtoResponse">6.37. <em>OrderDtoResponse</em></a></li>
-<li><a href="#OrderIdFilter">6.38. <em>OrderIdFilter</em></a></li>
-<li><a href="#OrderIdsFilter">6.39. <em>OrderIdsFilter</em></a></li>
-<li><a href="#OrderMGDto">6.40. <em>OrderMGDto</em></a></li>
-<li><a href="#OrderMGDtoResponse">6.41. <em>OrderMGDtoResponse</em></a></li>
-<li><a href="#OrdersResponse">6.42. <em>OrdersResponse</em></a></li>
-<li><a href="#PlaceOrderReq">6.43. <em>PlaceOrderReq</em></a></li>
-<li><a href="#PlaceOrderResponse">6.44. <em>PlaceOrderResponse</em></a></li>
-<li><a href="#PosiVO">6.45. <em>PosiVO</em></a></li>
-<li><a href="#PositionResponse">6.46. <em>PositionResponse</em></a></li>
-<li><a href="#QueryContractResponse">6.47. <em>QueryContractResponse</em></a></li>
-<li><a href="#QuotSnapshotResponse">6.48. <em>QuotSnapshotResponse</em></a></li>
-<li><a href="#QuotSnapshotResponseResult">6.49. <em>QuotSnapshotResponseResult</em></a></li>
-<li><a href="#TickTradeBo">6.50. <em>TickTradeBo</em></a></li>
-<li><a href="#TickTradeResponse">6.51. <em>TickTradeResponse</em></a></li>
-<li><a href="#TickTradeResponseData">6.52. <em>TickTradeResponseData</em></a></li>
-<li><a href="#TransferMarginReq">6.53. <em>TransferMarginReq</em></a></li>
-<li><a href="#TransferMarginResponse">6.54. <em>TransferMarginResponse</em></a></li>
-<li><a href="#TransferReq">6.55. <em>TransferReq</em></a></li>
-<li><a href="#TransferResponse">6.56. <em>TransferResponse</em></a></li>
-<li><a href="#VarietyMarginVo">6.57. <em>VarietyMarginVo</em></a></li>
+<li><a href="#CurrencyPriceVoResult">6.23. <em>CurrencyPriceVoResult</em></a></li>
+<li><a href="#CurrencyVo">6.24. <em>CurrencyVo</em></a></li>
+<li><a href="#CurrencyVoResult">6.25. <em>CurrencyVoResult</em></a></li>
+<li><a href="#ExchangePo">6.26. <em>ExchangePo</em></a></li>
+<li><a href="#ExchangePoResult">6.27. <em>ExchangePoResult</em></a></li>
+<li><a href="#ForceLowerResponse">6.28. <em>ForceLowerResponse</em></a></li>
+<li><a href="#ForceLowerVo">6.29. <em>ForceLowerVo</em></a></li>
+<li><a href="#FutureVarietyPo">6.30. <em>FutureVarietyPo</em></a></li>
+<li><a href="#Indicator">6.31. <em>Indicator</em></a></li>
+<li><a href="#IsolateReq">6.32. <em>IsolateReq</em></a></li>
+<li><a href="#IsolateResponse">6.33. <em>IsolateResponse</em></a></li>
+<li><a href="#MarginRateResponse">6.34. <em>MarginRateResponse</em></a></li>
+<li><a href="#MarginRateVo">6.35. <em>MarginRateVo</em></a></li>
+<li><a href="#MarketStatVo">6.36. <em>MarketStatVo</em></a></li>
+<li><a href="#MarketStatVoResponse">6.37. <em>MarketStatVoResponse</em></a></li>
+<li><a href="#MatchMGDto">6.38. <em>MatchMGDto</em></a></li>
+<li><a href="#MatchVoResponse">6.39. <em>MatchVoResponse</em></a></li>
+<li><a href="#OrderDto">6.40. <em>OrderDto</em></a></li>
+<li><a href="#OrderDtoResponse">6.41. <em>OrderDtoResponse</em></a></li>
+<li><a href="#OrderIdFilter">6.42. <em>OrderIdFilter</em></a></li>
+<li><a href="#OrderIdsFilter">6.43. <em>OrderIdsFilter</em></a></li>
+<li><a href="#OrderMGDto">6.44. <em>OrderMGDto</em></a></li>
+<li><a href="#OrderMGDtoResponse">6.45. <em>OrderMGDtoResponse</em></a></li>
+<li><a href="#OrdersResponse">6.46. <em>OrdersResponse</em></a></li>
+<li><a href="#PlaceOrderReq">6.47. <em>PlaceOrderReq</em></a></li>
+<li><a href="#PlaceOrderResponse">6.48. <em>PlaceOrderResponse</em></a></li>
+<li><a href="#PosiVO">6.49. <em>PosiVO</em></a></li>
+<li><a href="#PositionResponse">6.50. <em>PositionResponse</em></a></li>
+<li><a href="#QueryContractResponse">6.51. <em>QueryContractResponse</em></a></li>
+<li><a href="#QuotSnapshotResponse">6.52. <em>QuotSnapshotResponse</em></a></li>
+<li><a href="#QuotSnapshotResponseResult">6.53. <em>QuotSnapshotResponseResult</em></a></li>
+<li><a href="#TickTradeBo">6.54. <em>TickTradeBo</em></a></li>
+<li><a href="#TickTradeResponse">6.55. <em>TickTradeResponse</em></a></li>
+<li><a href="#TickTradeResponseData">6.56. <em>TickTradeResponseData</em></a></li>
+<li><a href="#TransferMarginReq">6.57. <em>TransferMarginReq</em></a></li>
+<li><a href="#TransferMarginResponse">6.58. <em>TransferMarginResponse</em></a></li>
+<li><a href="#TransferReq">6.59. <em>TransferReq</em></a></li>
+<li><a href="#TransferResponse">6.60. <em>TransferResponse</em></a></li>
+<li><a href="#VarietyMarginVo">6.61. <em>VarietyMarginVo</em></a></li>
 </ul>
 </li>
 </ul>
@@ -154,8 +162,8 @@ div .switch--item:not(:first-child) {
 <div class="sect1 Common">
 <h2 id="基础信息"><a class="anchor" href="#基础信息"></a>1. 基础信息</h2>
 <div class="sectionbody">
-<div class="sect2 commonQueryCurrency">
-<h3 id="获取币种信息"><a class="anchor" href="#获取币种信息"></a>1.1. 获取币种信息</h3>
+<div class="sect2 commonExchangeCoins">
+<h3 id="获取计价货币的usd价格"><a class="anchor" href="#获取计价货币的usd价格"></a>1.1. 获取计价货币的USD价格</h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -164,7 +172,7 @@ div .switch--item:not(:first-child) {
 </td>
 <td class="content">
 <div class="paragraph">
-<p>GET /api/v1/common/queryCurrency</p>
+<p>GET /api/v1/common/exchange/coins</p>
 </div>
 </td>
 </tr>
@@ -190,14 +198,14 @@ div .switch--item:not(:first-child) {
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Successful</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#CurrencyVo"><em>CurrencyVo</em></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#CurrencyPriceVo"><em>CurrencyPriceVo</em></a></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div class="sect2 queryContract">
-<h3 id="查询可用的期货-品种"><a class="anchor" href="#查询可用的期货-品种"></a>1.2. 查询可用的期货-品种</h3>
+<div class="sect2 commonExchangeList">
+<h3 id="获取交易币种"><a class="anchor" href="#获取交易币种"></a>1.2. 获取交易币种</h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -206,7 +214,7 @@ div .switch--item:not(:first-child) {
 </td>
 <td class="content">
 <div class="paragraph">
-<p>GET /api/v1/future/queryContract</p>
+<p>GET /api/v1/common/exchange/list</p>
 </div>
 </td>
 </tr>
@@ -231,6 +239,90 @@ div .switch--item:not(:first-child) {
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Successful</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#ExchangePo"><em>ExchangePo</em></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2 commonQueryCurrency">
+<h3 id="获取币种信息"><a class="anchor" href="#获取币种信息"></a>1.3. 获取币种信息</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>GET /api/v1/common/queryCurrency</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="返回值-3"><a class="anchor" href="#返回值-3"></a>1.3.1. 返回值</h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. http response codes</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 50%;">
+<col style="width: 16.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Message</th>
+<th class="tableblock halign-left valign-top">Datatype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Successful</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#CurrencyVo"><em>CurrencyVo</em></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2 queryContract">
+<h3 id="查询可用的期货-品种"><a class="anchor" href="#查询可用的期货-品种"></a>1.4. 查询可用的期货-品种</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>GET /api/v1/future/queryContract</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="返回值-4"><a class="anchor" href="#返回值-4"></a>1.4.1. 返回值</h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. http response codes</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 50%;">
+<col style="width: 16.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Message</th>
+<th class="tableblock halign-left valign-top">Datatype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Successful operation</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#QueryContractResponse"><em>QueryContractResponse</em></a></p></td>
 </tr>
@@ -239,7 +331,7 @@ div .switch--item:not(:first-child) {
 </div>
 </div>
 <div class="sect2 queryVarietyMargin">
-<h3 id="查询品种保证金梯度"><a class="anchor" href="#查询品种保证金梯度"></a>1.3. 查询品种保证金梯度</h3>
+<h3 id="查询品种保证金梯度"><a class="anchor" href="#查询品种保证金梯度"></a>1.5. 查询品种保证金梯度</h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -255,7 +347,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="参数"><a class="anchor" href="#参数"></a>1.3.1. 参数</h4>
+<h4 id="参数"><a class="anchor" href="#参数"></a>1.5.1. 参数</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -292,9 +384,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-3"><a class="anchor" href="#返回值-3"></a>1.3.2. 返回值</h4>
+<h4 id="返回值-5"><a class="anchor" href="#返回值-5"></a>1.5.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. http response codes</caption>
+<caption class="title">Table 5. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -376,9 +468,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-4"><a class="anchor" href="#返回值-4"></a>2.1.2. 返回值</h4>
+<h4 id="返回值-6"><a class="anchor" href="#返回值-6"></a>2.1.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. http response codes</caption>
+<caption class="title">Table 6. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -418,9 +510,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-5"><a class="anchor" href="#返回值-5"></a>2.2.1. 返回值</h4>
+<h4 id="返回值-7"><a class="anchor" href="#返回值-7"></a>2.2.1. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. http response codes</caption>
+<caption class="title">Table 7. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -490,9 +582,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-6"><a class="anchor" href="#返回值-6"></a>2.3.2. 返回值</h4>
+<h4 id="返回值-8"><a class="anchor" href="#返回值-8"></a>2.3.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. http response codes</caption>
+<caption class="title">Table 8. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -562,9 +654,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-7"><a class="anchor" href="#返回值-7"></a>2.4.2. 返回值</h4>
+<h4 id="返回值-9"><a class="anchor" href="#返回值-9"></a>2.4.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. http response codes</caption>
+<caption class="title">Table 9. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -634,9 +726,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-8"><a class="anchor" href="#返回值-8"></a>2.5.2. 返回值</h4>
+<h4 id="返回值-10"><a class="anchor" href="#返回值-10"></a>2.5.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. http response codes</caption>
+<caption class="title">Table 10. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -711,9 +803,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-9"><a class="anchor" href="#返回值-9"></a>3.1.2. 返回值</h4>
+<h4 id="返回值-11"><a class="anchor" href="#返回值-11"></a>3.1.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 9. http response codes</caption>
+<caption class="title">Table 11. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -753,9 +845,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-10"><a class="anchor" href="#返回值-10"></a>3.2.1. 返回值</h4>
+<h4 id="返回值-12"><a class="anchor" href="#返回值-12"></a>3.2.1. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 10. http response codes</caption>
+<caption class="title">Table 12. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -825,9 +917,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-11"><a class="anchor" href="#返回值-11"></a>3.3.2. 返回值</h4>
+<h4 id="返回值-13"><a class="anchor" href="#返回值-13"></a>3.3.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 11. http response codes</caption>
+<caption class="title">Table 13. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -902,9 +994,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-12"><a class="anchor" href="#返回值-12"></a>4.1.2. 返回值</h4>
+<h4 id="返回值-14"><a class="anchor" href="#返回值-14"></a>4.1.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 12. http response codes</caption>
+<caption class="title">Table 14. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -944,9 +1036,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-13"><a class="anchor" href="#返回值-13"></a>4.2.1. 返回值</h4>
+<h4 id="返回值-15"><a class="anchor" href="#返回值-15"></a>4.2.1. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 13. http response codes</caption>
+<caption class="title">Table 15. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -1016,9 +1108,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-14"><a class="anchor" href="#返回值-14"></a>4.3.2. 返回值</h4>
+<h4 id="返回值-16"><a class="anchor" href="#返回值-16"></a>4.3.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 14. http response codes</caption>
+<caption class="title">Table 16. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -1088,9 +1180,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-15"><a class="anchor" href="#返回值-15"></a>4.4.2. 返回值</h4>
+<h4 id="返回值-17"><a class="anchor" href="#返回值-17"></a>4.4.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 15. http response codes</caption>
+<caption class="title">Table 17. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -1160,9 +1252,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-16"><a class="anchor" href="#返回值-16"></a>4.5.2. 返回值</h4>
+<h4 id="返回值-18"><a class="anchor" href="#返回值-18"></a>4.5.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 16. http response codes</caption>
+<caption class="title">Table 18. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -1232,9 +1324,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-17"><a class="anchor" href="#返回值-17"></a>4.6.2. 返回值</h4>
+<h4 id="返回值-19"><a class="anchor" href="#返回值-19"></a>4.6.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 17. http response codes</caption>
+<caption class="title">Table 19. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -1258,7 +1350,7 @@ div .switch--item:not(:first-child) {
 </div>
 </div>
 <div class="sect2 queryActiveOrder">
-<h3 id="用户当前委托查询"><a class="anchor" href="#用户当前委托查询"></a>4.7. 用户当前委托查询</h3>
+<h3 id="当前用户的委托查询"><a class="anchor" href="#当前用户的委托查询"></a>4.7. 当前用户的委托查询</h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1274,9 +1366,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-18"><a class="anchor" href="#返回值-18"></a>4.7.1. 返回值</h4>
+<h4 id="返回值-20"><a class="anchor" href="#返回值-20"></a>4.7.1. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 18. http response codes</caption>
+<caption class="title">Table 20. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -1316,9 +1408,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-19"><a class="anchor" href="#返回值-19"></a>4.8.1. 返回值</h4>
+<h4 id="返回值-21"><a class="anchor" href="#返回值-21"></a>4.8.1. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 19. http response codes</caption>
+<caption class="title">Table 21. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -1341,8 +1433,8 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 </div>
-<div class="sect2 queryHisOrder">
-<h3 id="历史委托查询"><a class="anchor" href="#历史委托查询"></a>4.9. 历史委托查询</h3>
+<div class="sect2 queryHisMatch">
+<h3 id="最新成交查询"><a class="anchor" href="#最新成交查询"></a>4.9. 最新成交查询</h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1351,7 +1443,7 @@ div .switch--item:not(:first-child) {
 </td>
 <td class="content">
 <div class="paragraph">
-<p>GET /api/v1/future/queryHisOrder</p>
+<p>GET /api/v1/future/queryHisMatch</p>
 </div>
 </td>
 </tr>
@@ -1388,9 +1480,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-20"><a class="anchor" href="#返回值-20"></a>4.9.2. 返回值</h4>
+<h4 id="返回值-22"><a class="anchor" href="#返回值-22"></a>4.9.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 20. http response codes</caption>
+<caption class="title">Table 22. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -1407,14 +1499,14 @@ div .switch--item:not(:first-child) {
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Successful</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#OrderMGDtoResponse"><em>OrderMGDtoResponse</em></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#MatchVoResponse"><em>MatchVoResponse</em></a></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div class="sect2 queryOrder">
-<h3 id="获取单个订单"><a class="anchor" href="#获取单个订单"></a>4.10. 获取单个订单</h3>
+<div class="sect2 queryHisOrder">
+<h3 id="最新成交查询-2"><a class="anchor" href="#最新成交查询-2"></a>4.10. 最新成交查询</h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1423,7 +1515,7 @@ div .switch--item:not(:first-child) {
 </td>
 <td class="content">
 <div class="paragraph">
-<p>GET /api/v1/future/order</p>
+<p>GET /api/v1/future/queryHisOrder</p>
 </div>
 </td>
 </tr>
@@ -1454,15 +1546,87 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#ContractPageableFilter"><em>ContractPageableFilter</em></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="返回值-23"><a class="anchor" href="#返回值-23"></a>4.10.2. 返回值</h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 23. http response codes</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 50%;">
+<col style="width: 16.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Message</th>
+<th class="tableblock halign-left valign-top">Datatype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Successful</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#OrderMGDtoResponse"><em>OrderMGDtoResponse</em></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2 queryOrder">
+<h3 id="获取单个订单"><a class="anchor" href="#获取单个订单"></a>4.11. 获取单个订单</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>GET /api/v1/future/order</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="参数-10"><a class="anchor" href="#参数-10"></a>4.11.1. 参数</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 37.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">filter</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#OrderIdFilter"><em>OrderIdFilter</em></a></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-21"><a class="anchor" href="#返回值-21"></a>4.10.2. 返回值</h4>
+<h4 id="返回值-24"><a class="anchor" href="#返回值-24"></a>4.11.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 21. http response codes</caption>
+<caption class="title">Table 24. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -1507,9 +1671,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-22"><a class="anchor" href="#返回值-22"></a>5.1.1. 返回值</h4>
+<h4 id="返回值-25"><a class="anchor" href="#返回值-25"></a>5.1.1. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 22. http response codes</caption>
+<caption class="title">Table 25. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -1549,7 +1713,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="参数-10"><a class="anchor" href="#参数-10"></a>5.2.1. 参数</h4>
+<h4 id="参数-11"><a class="anchor" href="#参数-11"></a>5.2.1. 参数</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1579,9 +1743,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-23"><a class="anchor" href="#返回值-23"></a>5.2.2. 返回值</h4>
+<h4 id="返回值-26"><a class="anchor" href="#返回值-26"></a>5.2.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 23. http response codes</caption>
+<caption class="title">Table 26. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -1605,7 +1769,7 @@ div .switch--item:not(:first-child) {
 </div>
 </div>
 <div class="sect2 queryUserMargin">
-<h3 id="用户资产查询"><a class="anchor" href="#用户资产查询"></a>5.3. 用户资产查询</h3>
+<h3 id="可用金额查询"><a class="anchor" href="#可用金额查询"></a>5.3. 可用金额查询</h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1621,9 +1785,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-24"><a class="anchor" href="#返回值-24"></a>5.3.1. 返回值</h4>
+<h4 id="返回值-27"><a class="anchor" href="#返回值-27"></a>5.3.1. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 24. http response codes</caption>
+<caption class="title">Table 27. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -1693,9 +1857,9 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回值-25"><a class="anchor" href="#返回值-25"></a>5.4.2. 返回值</h4>
+<h4 id="返回值-28"><a class="anchor" href="#返回值-28"></a>5.4.2. 返回值</h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 25. http response codes</caption>
+<caption class="title">Table 28. http response codes</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 50%;">
@@ -1812,14 +1976,21 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">frozenForTrade</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">委托保证金</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托冻结资产</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">initMargin</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">持仓保证金</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">已占用保证金</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">frozenInitMargin</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托冻结保证金</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -1996,20 +2167,8 @@ div .switch--item:not(:first-child) {
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List of [成功结果[客户端ID, 订单ID], 失败结果[客户端ID, 错误码]]</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{
-     	"code": 0,
-     	"msg": "success",
-     	"data": {
-     		"succ": [
-     			["60fe4e88b4cb450c9710be2f801897b7", "11588836983942258"],
-     			["9119b1a42f604c5892097b76e1c108d5", '"1588836983942307"]
-     		],
-     		"reject": [
-     		  ["6004705ca6cb4647bedb72d86e6155a0", "1019"]
-     		]
-     	}
-     }</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List  of <a href="#string">[string]</a></p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
@@ -2069,7 +2228,7 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">clientOrderId</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">客户端委托ID, 最大32位，包含数字大小写字母, 中横线, 下划线</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">客户端委托ID</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -2097,7 +2256,7 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">side</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">BigDecimal</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">买卖方向: 1 (买)， -1 (卖)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">买卖方向，1买-1卖</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -2115,10 +2274,10 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">orderSubType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">positionEffect</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">委托sub类型: 0（默认），1（被动委托）</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BigDecimal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">开平标志，1开仓，2平仓</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -2697,7 +2856,44 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="CurrencyVo"><a class="anchor" href="#CurrencyVo"></a>6.23. <em>CurrencyVo</em></h3>
+<h3 id="CurrencyPriceVoResult"><a class="anchor" href="#CurrencyPriceVoResult"></a>6.23. <em>CurrencyPriceVoResult</em></h3>
+<table class="tableblock frame-all grid-all stretch fields-CurrencyPriceVoResult">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 10%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field Name</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">currencyId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">货币ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">latest</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">当前USD价格</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="CurrencyVo"><a class="anchor" href="#CurrencyVo"></a>6.24. <em>CurrencyVo</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-CurrencyVo">
 <colgroup>
 <col style="width: 20%;">
@@ -2727,7 +2923,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="CurrencyVoResult"><a class="anchor" href="#CurrencyVoResult"></a>6.24. <em>CurrencyVoResult</em></h3>
+<h3 id="CurrencyVoResult"><a class="anchor" href="#CurrencyVoResult"></a>6.25. <em>CurrencyVoResult</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-CurrencyVoResult">
 <colgroup>
 <col style="width: 20%;">
@@ -2775,10 +2971,38 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">displayPrecision</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">页面显示位数</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">minWithdrawQuantity</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最小提现数</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">withdrawFlatFee</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">提现手续费</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">auditThreshold</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">人工审核阈值</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exeutiveAuditThreshold</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">高管审核阈值</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
 </tr>
 <tr>
@@ -2789,11 +3013,25 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">forbidCreateAddress</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是否允许生成地址：0允许，1禁止</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">forbidRecharge</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">是否允许充值：0允许，1禁止</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prefixUrl</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">币种浏览器地址</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">enabled</p></td>
@@ -2806,7 +3044,88 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="ForceLowerResponse"><a class="anchor" href="#ForceLowerResponse"></a>6.25. <em>ForceLowerResponse</em></h3>
+<h3 id="ExchangePo"><a class="anchor" href="#ExchangePo"></a>6.26. <em>ExchangePo</em></h3>
+<table class="tableblock frame-all grid-all stretch fields-ExchangePo">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 10%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field Name</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">result</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List  of <a href="#ExchangePo_result">[ExchangePo_result]</a></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="ExchangePoResult"><a class="anchor" href="#ExchangePoResult"></a>6.27. <em>ExchangePoResult</em></h3>
+<table class="tableblock frame-all grid-all stretch fields-ExchangePoResult">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 10%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field Name</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">法币ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">法币名称</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rate</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">当前相对于USD的汇率</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateTime</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">更新时间</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="ForceLowerResponse"><a class="anchor" href="#ForceLowerResponse"></a>6.28. <em>ForceLowerResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-ForceLowerResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -2850,7 +3169,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="ForceLowerVo"><a class="anchor" href="#ForceLowerVo"></a>6.26. <em>ForceLowerVo</em></h3>
+<h3 id="ForceLowerVo"><a class="anchor" href="#ForceLowerVo"></a>6.29. <em>ForceLowerVo</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-ForceLowerVo">
 <colgroup>
 <col style="width: 20%;">
@@ -2887,7 +3206,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="FutureVarietyPo"><a class="anchor" href="#FutureVarietyPo"></a>6.27. <em>FutureVarietyPo</em></h3>
+<h3 id="FutureVarietyPo"><a class="anchor" href="#FutureVarietyPo"></a>6.30. <em>FutureVarietyPo</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-FutureVarietyPo">
 <colgroup>
 <col style="width: 20%;">
@@ -2921,11 +3240,32 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">underlyingId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">表的ID</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">productType</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">产品类型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">symbol</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">品种名称</p></td>
 <td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">chainextCid</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">指数</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">priceTick</p></td>
@@ -2998,6 +3338,34 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">contractType</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">合约类型，1定期，2永续</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deliveryType</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">交割类型，1现金交割，2实物交割</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deliveryPeriod</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">交割周期，1日2周3月</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deliveryFeeRatio</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">交割手续费</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">contractSide</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
@@ -3040,6 +3408,27 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fairBasisInterval</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">结算价基差计算间隔，单位秒</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clearPriceInterval</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">结算价计算间隔，单位秒</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deliveryPriceInterval</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">交割价计算间隔</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">perpetualPremiumLimit</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
@@ -3075,6 +3464,13 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">isAutoList</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是否自动加挂，0是1否</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">onceListTime</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
@@ -3106,7 +3502,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="Indicator"><a class="anchor" href="#Indicator"></a>6.28. <em>Indicator</em></h3>
+<h3 id="Indicator"><a class="anchor" href="#Indicator"></a>6.31. <em>Indicator</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-Indicator">
 <colgroup>
 <col style="width: 20%;">
@@ -3210,6 +3606,20 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hph</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hpl</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">tt</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
@@ -3287,6 +3697,13 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dp</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">fr</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
@@ -3328,11 +3745,25 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sl</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BigDecimal</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ip</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="IsolateReq"><a class="anchor" href="#IsolateReq"></a>6.29. <em>IsolateReq</em></h3>
+<h3 id="IsolateReq"><a class="anchor" href="#IsolateReq"></a>6.32. <em>IsolateReq</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-IsolateReq">
 <colgroup>
 <col style="width: 20%;">
@@ -3362,7 +3793,7 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">initMarginRate</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">初始保证金率</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">保证金初始值</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -3376,7 +3807,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="IsolateResponse"><a class="anchor" href="#IsolateResponse"></a>6.30. <em>IsolateResponse</em></h3>
+<h3 id="IsolateResponse"><a class="anchor" href="#IsolateResponse"></a>6.33. <em>IsolateResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-IsolateResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -3420,7 +3851,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="MarginRateResponse"><a class="anchor" href="#MarginRateResponse"></a>6.31. <em>MarginRateResponse</em></h3>
+<h3 id="MarginRateResponse"><a class="anchor" href="#MarginRateResponse"></a>6.34. <em>MarginRateResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-MarginRateResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -3464,7 +3895,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="MarginRateVo"><a class="anchor" href="#MarginRateVo"></a>6.32. <em>MarginRateVo</em></h3>
+<h3 id="MarginRateVo"><a class="anchor" href="#MarginRateVo"></a>6.35. <em>MarginRateVo</em></h3>
 <div class="paragraph">
 <p>保证金率</p>
 </div>
@@ -3494,7 +3925,7 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">marginRate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">arginRate</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">保证金率</p></td>
@@ -3511,7 +3942,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="MarketStatVo"><a class="anchor" href="#MarketStatVo"></a>6.33. <em>MarketStatVo</em></h3>
+<h3 id="MarketStatVo"><a class="anchor" href="#MarketStatVo"></a>6.36. <em>MarketStatVo</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-MarketStatVo">
 <colgroup>
 <col style="width: 20%;">
@@ -3569,7 +4000,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="MarketStatVoResponse"><a class="anchor" href="#MarketStatVoResponse"></a>6.34. <em>MarketStatVoResponse</em></h3>
+<h3 id="MarketStatVoResponse"><a class="anchor" href="#MarketStatVoResponse"></a>6.37. <em>MarketStatVoResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-MarketStatVoResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -3613,7 +4044,226 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="MatchVoResponse"><a class="anchor" href="#MatchVoResponse"></a>6.35. <em>MatchVoResponse</em></h3>
+<h3 id="MatchMGDto"><a class="anchor" href="#MatchMGDto"></a>6.38. <em>MatchMGDto</em></h3>
+<table class="tableblock frame-all grid-all stretch fields-MatchMGDto">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 10%;">
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 10%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field Name</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">applId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">期货ID,2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">matchTime</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">成交时间</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">contractId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">交易对ID、合约号</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">execId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">成交编号</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bidUserId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">买方账号ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">askUserId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">卖方账号ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bidOrderId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">买方委托号</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">askOrderId</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">卖方委托号</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">matchPrice</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">成交价</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">matchQty</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">成交数量</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">matchAmt</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">成交金额</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bidFee</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">买方手续费</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">askFee</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">卖方手续费</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">takerSide</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Taker方向,1: 买方吃单，-1：卖方吃单</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">side</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">买卖方向</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updateTime</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最近更新时间</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bidPositionEffect</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">买方开平标志</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">askPositionEffect</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">卖方开平标志</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bidMarginType</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">买方保证金类型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">askMarginType</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">卖方保证金类型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bidInitRate</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">买方初始保证金率</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">askInitRate</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">卖方初始保证金率</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bidMatchType</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">买方成交类型：0普通成交1强平成交2强减成交（破产方）3强减</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">askMatchType</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">卖方成交类型：0普通成交1强平成交2强减成交（破产方）3强减</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bidPnlType</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">买方盈亏类型：0正常成交1正常平仓2强平3强减</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bidPnl</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">买方平仓盈亏</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">askPnlType</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">卖方盈亏类型：0正常成交1正常平仓2强平3强减</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">askPnl</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">卖方平仓盈亏</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="MatchVoResponse"><a class="anchor" href="#MatchVoResponse"></a>6.39. <em>MatchVoResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-MatchVoResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -3649,7 +4299,7 @@ div .switch--item:not(:first-child) {
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List  of <a href="#MatchMGDto">[MatchMGDto]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List  of <a href="#MatchMGDto"><em>MatchMGDto</em></a></p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -3657,7 +4307,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="OrderDto"><a class="anchor" href="#OrderDto"></a>6.36. <em>OrderDto</em></h3>
+<h3 id="OrderDto"><a class="anchor" href="#OrderDto"></a>6.40. <em>OrderDto</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-OrderDto">
 <colgroup>
 <col style="width: 20%;">
@@ -3677,6 +4327,13 @@ div .switch--item:not(:first-child) {
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">positionEffect</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">开平标志，1开仓 2平仓</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">marginType</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
@@ -3684,101 +4341,31 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">contractId</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">合约ID</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">side</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">买卖方向</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">orderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">initMarginRate</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">委托订单号</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">初始保保证金率</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">clOrderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fcOrderId</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">客户端委托订单号</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">强平委托号，非空时为强平委托</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">orderPrice</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">contractUnit</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">委托价</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">合约单位</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">orderQty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stopPrice</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">委托数量</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">orderTime</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">委托时间</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">orderType</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">委托类型：1（限价），3（市价）</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">orderStatus</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">委托状态 0-未申报,1-正在申报,2-已申报未成交,3-部分成交,4-全部成交,5-部分撤单,6-全部撤单,7-撤单中,8-失效,11-缓存高于条件的委托,12-缓存低于条件的委托</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">matchQty</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">成交数量</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">matchAmt</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">成交金额</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">matchTime</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">成交时间</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cancelQty</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">撤单数量</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">avgPrice</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">成交均价</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">条件单触发价格</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -3789,31 +4376,24 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">timeInForce</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stopCondition</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">订单有效时期类型，0-默认值； 1-取消前有效</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">止损标志，0：默认，2：止损</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">stopPrice</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">minimalQuantity</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">条件单触发价格</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">fcOrderId</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">强平委托号，非空时为强平委托</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">止损点位</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="OrderDtoResponse"><a class="anchor" href="#OrderDtoResponse"></a>6.37. <em>OrderDtoResponse</em></h3>
+<h3 id="OrderDtoResponse"><a class="anchor" href="#OrderDtoResponse"></a>6.41. <em>OrderDtoResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-OrderDtoResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -3857,7 +4437,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="OrderIdFilter"><a class="anchor" href="#OrderIdFilter"></a>6.38. <em>OrderIdFilter</em></h3>
+<h3 id="OrderIdFilter"><a class="anchor" href="#OrderIdFilter"></a>6.42. <em>OrderIdFilter</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-OrderIdFilter">
 <colgroup>
 <col style="width: 20%;">
@@ -3887,7 +4467,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="OrderIdsFilter"><a class="anchor" href="#OrderIdsFilter"></a>6.39. <em>OrderIdsFilter</em></h3>
+<h3 id="OrderIdsFilter"><a class="anchor" href="#OrderIdsFilter"></a>6.43. <em>OrderIdsFilter</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-OrderIdsFilter">
 <colgroup>
 <col style="width: 20%;">
@@ -3917,7 +4497,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="OrderMGDto"><a class="anchor" href="#OrderMGDto"></a>6.40. <em>OrderMGDto</em></h3>
+<h3 id="OrderMGDto"><a class="anchor" href="#OrderMGDto"></a>6.44. <em>OrderMGDto</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-OrderMGDto">
 <colgroup>
 <col style="width: 20%;">
@@ -3937,7 +4517,7 @@ div .switch--item:not(:first-child) {
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">applId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">appl_id</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">应用ID,期货：2</p></td>
@@ -3951,14 +4531,14 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">userId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user_id</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">用户ID</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">contractId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">contract_id</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">合约ID</p></td>
@@ -3993,101 +4573,150 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">orderType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">order_type</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">委托类型，1-限价；3-市价</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">orderSubType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">order_sub_type</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">委托子类型, 1-被动委托；2-最近价触发条件委托；3-指数触发</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">timeInForce</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">time_in_force</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">订单有效时期类型，0-默认值； 1-取消前有效</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">stopPrice</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">minimal_quantity</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最小成交量</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stop_price</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">止损止盈价</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">stopCondition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stop_condition</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">止损止盈标志，0-默认；1-止盈；2-止损</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">orderStatus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">order_status</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">委托状态 0-未申报,1-正在申报,2-已申报未成交,3-部分成交,4-全部成交,5-部分撤单,6-全部撤单,7-撤单中,8-失效,11-缓存高于条件的委托,12-缓存低于条件的委托</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">clOrderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">maker_fee_ratio</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maker手续费率</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">taker_fee_ratio</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Taker手续费率</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cl_order_id</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">客户订单编号</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">filledCurrency</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">filled_currency</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">成交金额</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">filledQuantity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">filled_quantity</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">成交量</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">canceledQuantity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">canceled_quantity</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">撤单数量</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">matchTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">match_time</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">成交时间</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">marginType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">position_effect</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">开平标志，1开仓，2平仓</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">margin_type</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">保证金类型，1全仓，2逐仓</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">fcOrderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">margin_rate</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">保证金率</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fc_order_id</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">强平委托号</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int64</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delta_price</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">标记价与委托价之差</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">frozen_price</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">资金计算价格</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">double</p></td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="OrderMGDtoResponse"><a class="anchor" href="#OrderMGDtoResponse"></a>6.41. <em>OrderMGDtoResponse</em></h3>
+<h3 id="OrderMGDtoResponse"><a class="anchor" href="#OrderMGDtoResponse"></a>6.45. <em>OrderMGDtoResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-OrderMGDtoResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -4131,7 +4760,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="OrdersResponse"><a class="anchor" href="#OrdersResponse"></a>6.42. <em>OrdersResponse</em></h3>
+<h3 id="OrdersResponse"><a class="anchor" href="#OrdersResponse"></a>6.46. <em>OrdersResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-OrdersResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -4175,7 +4804,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="PlaceOrderReq"><a class="anchor" href="#PlaceOrderReq"></a>6.43. <em>PlaceOrderReq</em></h3>
+<h3 id="PlaceOrderReq"><a class="anchor" href="#PlaceOrderReq"></a>6.47. <em>PlaceOrderReq</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-PlaceOrderReq">
 <colgroup>
 <col style="width: 20%;">
@@ -4198,7 +4827,7 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">clientOrderId</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">客户端委托ID,最大32位，包含数字大小写字母, 中横线, 下划线</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">客户端委托ID,如果不传使用uuid</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -4226,7 +4855,7 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">price</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">委托价格,orderType等于3（市价）时非必填</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托价格,order_type等于3（市价）时非必填</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -4247,7 +4876,21 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">orderSubType</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0（默认值），1（被动委托）</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0（默认值），1（被动委托），2（最近价触发条件委托），3（指数触发条件委托），4（标记价触发条件委托）</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stopPrice</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">条件单是需要,止损价格，order_type等于3（市价）时非必填</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stopCondition</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0：默认，2：止损</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">int32</p></td>
 </tr>
 <tr>
@@ -4275,7 +4918,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="PlaceOrderResponse"><a class="anchor" href="#PlaceOrderResponse"></a>6.44. <em>PlaceOrderResponse</em></h3>
+<h3 id="PlaceOrderResponse"><a class="anchor" href="#PlaceOrderResponse"></a>6.48. <em>PlaceOrderResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-PlaceOrderResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -4319,7 +4962,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="PosiVO"><a class="anchor" href="#PosiVO"></a>6.45. <em>PosiVO</em></h3>
+<h3 id="PosiVO"><a class="anchor" href="#PosiVO"></a>6.49. <em>PosiVO</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-PosiVO">
 <colgroup>
 <col style="width: 20%;">
@@ -4367,13 +5010,6 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">extraMargin</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">额外保证金</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">posiStatus</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
@@ -4405,7 +5041,28 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">maintainMarginRate</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">维持保证金率</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">维持保证金</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">frozenCloseQty</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">平仓委托冻结量</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">frozenOpenQty</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">开仓委托冻结量</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">extraMargin</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">额外保证金</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -4419,7 +5076,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="PositionResponse"><a class="anchor" href="#PositionResponse"></a>6.46. <em>PositionResponse</em></h3>
+<h3 id="PositionResponse"><a class="anchor" href="#PositionResponse"></a>6.50. <em>PositionResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-PositionResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -4463,7 +5120,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="QueryContractResponse"><a class="anchor" href="#QueryContractResponse"></a>6.47. <em>QueryContractResponse</em></h3>
+<h3 id="QueryContractResponse"><a class="anchor" href="#QueryContractResponse"></a>6.51. <em>QueryContractResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-QueryContractResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -4507,7 +5164,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="QuotSnapshotResponse"><a class="anchor" href="#QuotSnapshotResponse"></a>6.48. <em>QuotSnapshotResponse</em></h3>
+<h3 id="QuotSnapshotResponse"><a class="anchor" href="#QuotSnapshotResponse"></a>6.52. <em>QuotSnapshotResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-QuotSnapshotResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -4544,7 +5201,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="QuotSnapshotResponseResult"><a class="anchor" href="#QuotSnapshotResponseResult"></a>6.49. <em>QuotSnapshotResponseResult</em></h3>
+<h3 id="QuotSnapshotResponseResult"><a class="anchor" href="#QuotSnapshotResponseResult"></a>6.53. <em>QuotSnapshotResponseResult</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-QuotSnapshotResponseResult">
 <colgroup>
 <col style="width: 20%;">
@@ -4648,6 +5305,20 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hph</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">历史最高价：historyPriceHigh</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hpl</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">历史最低价：historyPriceLow</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">tt</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
@@ -4725,6 +5396,13 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dp</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">交割价格：deliveryPrice</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">fr</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
@@ -4760,6 +5438,20 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ts</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BigDecimal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">交易信号，1&#x3D;买，2&#x3D;卖：tradingsignal</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sl</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BigDecimal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1~100,交易信号强度：signalLevel</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ip</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
@@ -4784,7 +5476,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="TickTradeBo"><a class="anchor" href="#TickTradeBo"></a>6.50. <em>TickTradeBo</em></h3>
+<h3 id="TickTradeBo"><a class="anchor" href="#TickTradeBo"></a>6.54. <em>TickTradeBo</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-TickTradeBo">
 <colgroup>
 <col style="width: 20%;">
@@ -4835,7 +5527,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="TickTradeResponse"><a class="anchor" href="#TickTradeResponse"></a>6.51. <em>TickTradeResponse</em></h3>
+<h3 id="TickTradeResponse"><a class="anchor" href="#TickTradeResponse"></a>6.55. <em>TickTradeResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-TickTradeResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -4872,7 +5564,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="TickTradeResponseData"><a class="anchor" href="#TickTradeResponseData"></a>6.52. <em>TickTradeResponseData</em></h3>
+<h3 id="TickTradeResponseData"><a class="anchor" href="#TickTradeResponseData"></a>6.56. <em>TickTradeResponseData</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-TickTradeResponseData">
 <colgroup>
 <col style="width: 20%;">
@@ -4902,7 +5594,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="TransferMarginReq"><a class="anchor" href="#TransferMarginReq"></a>6.53. <em>TransferMarginReq</em></h3>
+<h3 id="TransferMarginReq"><a class="anchor" href="#TransferMarginReq"></a>6.57. <em>TransferMarginReq</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-TransferMarginReq">
 <colgroup>
 <col style="width: 20%;">
@@ -4939,7 +5631,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="TransferMarginResponse"><a class="anchor" href="#TransferMarginResponse"></a>6.54. <em>TransferMarginResponse</em></h3>
+<h3 id="TransferMarginResponse"><a class="anchor" href="#TransferMarginResponse"></a>6.58. <em>TransferMarginResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-TransferMarginResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -4983,7 +5675,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="TransferReq"><a class="anchor" href="#TransferReq"></a>6.55. <em>TransferReq</em></h3>
+<h3 id="TransferReq"><a class="anchor" href="#TransferReq"></a>6.59. <em>TransferReq</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-TransferReq">
 <colgroup>
 <col style="width: 20%;">
@@ -5027,7 +5719,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="TransferResponse"><a class="anchor" href="#TransferResponse"></a>6.56. <em>TransferResponse</em></h3>
+<h3 id="TransferResponse"><a class="anchor" href="#TransferResponse"></a>6.60. <em>TransferResponse</em></h3>
 <table class="tableblock frame-all grid-all stretch fields-TransferResponse">
 <colgroup>
 <col style="width: 20%;">
@@ -5071,7 +5763,7 @@ div .switch--item:not(:first-child) {
 </table>
 </div>
 <div class="sect2">
-<h3 id="VarietyMarginVo"><a class="anchor" href="#VarietyMarginVo"></a>6.57. <em>VarietyMarginVo</em></h3>
+<h3 id="VarietyMarginVo"><a class="anchor" href="#VarietyMarginVo"></a>6.61. <em>VarietyMarginVo</em></h3>
 <div class="paragraph">
 <p>期货-品种保证金信息</p>
 </div>
@@ -5144,23 +5836,24 @@ div .switch--item:not(:first-child) {
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2020-09-09 19:38:48 +0800
+Last updated 2020-10-22 14:36:26 +0800
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
 <script>hljs.initHighlighting()</script>
 <!-- <script src="tocbot-3.0.2/tocbot.js"></script> -->
-<script src="https://docs.spring.io/spring-boot/docs/current/reference/html/js/tocbot/tocbot.min.js"></script>
+<script
+    src="https://docs.spring.io/spring-boot/docs/current/reference/html/js/tocbot/tocbot.min.js"></script>
 <script src="https://docs.spring.io/spring-boot/docs/current/reference/html/js/toc.js"></script>
 <script>
-    var hs = document.getElementById("header-spring");
-    var h1 = hs.getElementsByTagName("h1")[0];
-    h1.innerHTML = "";
+  var hs = document.getElementById("header-spring");
+  var h1 = hs.getElementsByTagName("h1")[0];
+  h1.innerHTML = "";
 
-    img = document.createElement("img")
-    img.setAttribute("src", "images/wbf.png")
-    h1.appendChild(img)
+  img = document.createElement("img")
+  img.setAttribute("src", "images/wbf.png")
+  h1.appendChild(img)
 
 </script>
 </body>

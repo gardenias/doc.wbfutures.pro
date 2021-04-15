@@ -10,23 +10,24 @@
 @import url("https://docs.spring.io/spring-boot/docs/current/reference/html/css/spring.css");
 
 div .switch {
-    margin-left: 8px;
-    border-color: #406A2A;
-    border-radius: 4px 4px 0 0;
+  margin-left: 8px;
+  border-color: #406A2A;
+  border-radius: 4px 4px 0 0;
 }
 
 div .switch--item {
-    color: #406A2A;
-    background-color: transparent;
+  color: #406A2A;
+  background-color: transparent;
 }
 
 div .switch--item.selected {
-    background-color: #406A2A;
+  background-color: #406A2A;
 }
 
 div .switch--item:not(:first-child) {
-    border-color: #406A2A;
+  border-color: #406A2A;
 }
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -52,16 +53,19 @@ div .switch--item:not(:first-child) {
 <li><a href="#获取持仓">3.1. 获取持仓</a></li>
 <li><a href="#获取k线">3.2. 获取K线</a></li>
 <li><a href="#获取减仓队列">3.3. 获取减仓队列</a></li>
-<li><a href="#获取市场统计">3.4. 获取市场统计</a></li>
-<li><a href="#获取当前委托">3.5. 获取当前委托</a></li>
-<li><a href="#获取成交">3.6. 获取成交</a></li>
-<li><a href="#获取全量行情数据">3.7. 获取全量行情数据</a></li>
-<li><a href="#获取系统时间">3.8. 获取系统时间</a></li>
-<li><a href="#获取行情快照买卖档位">3.9. 获取行情快照买卖档位</a></li>
-<li><a href="#获取行情快照基础数据">3.10. 获取行情快照基础数据</a></li>
-<li><a href="#获取资产">3.11. 获取资产</a></li>
-<li><a href="#获取逐笔成交">3.12. 获取逐笔成交</a></li>
-<li><a href="#获取通知">3.13. 获取通知</a></li>
+<li><a href="#获取历史委托">3.4. 获取历史委托</a></li>
+<li><a href="#获取币种价格">3.5. 获取币种价格</a></li>
+<li><a href="#获取市场统计">3.6. 获取市场统计</a></li>
+<li><a href="#获取当前委托">3.7. 获取当前委托</a></li>
+<li><a href="#获取成交">3.8. 获取成交</a></li>
+<li><a href="#获取全量行情数据">3.9. 获取全量行情数据</a></li>
+<li><a href="#获取法币汇率">3.10. 获取法币汇率</a></li>
+<li><a href="#获取系统时间">3.11. 获取系统时间</a></li>
+<li><a href="#获取行情快照买卖档位">3.12. 获取行情快照买卖档位</a></li>
+<li><a href="#获取行情快照基础数据">3.13. 获取行情快照基础数据</a></li>
+<li><a href="#获取资产">3.14. 获取资产</a></li>
+<li><a href="#获取逐笔成交">3.15. 获取逐笔成交</a></li>
+<li><a href="#获取通知">3.16. 获取通知</a></li>
 </ul>
 </li>
 </ul>
@@ -116,6 +120,22 @@ div .switch--item:not(:first-child) {
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">读取</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">推送类接口</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">match</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SUB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">获取历史委托</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">读取</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">推送类接口</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exchange</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SUB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">获取币种价格</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">否</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">读取</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">推送类接口</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">future_market_stat</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SUB</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">获取市场统计</p></td>
@@ -143,6 +163,14 @@ div .switch--item:not(:first-child) {
 <td class="tableblock halign-left valign-top"><p class="tableblock">future_all_indicator</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SUB</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">获取全量行情数据</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">否</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">读取</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">推送类接口</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exchange</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SUB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">获取法币汇率</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">否</p></td>
 </tr>
 <tr>
@@ -215,6 +243,9 @@ div .switch--item:not(:first-child) {
 <p><code>3012</code>: 持仓</p>
 </li>
 <li>
+<p><code>3006</code>: 历史委托</p>
+</li>
+<li>
 <p><code>3010</code>: 当前成交</p>
 </li>
 <li>
@@ -248,7 +279,7 @@ div .switch--item:not(:first-child) {
 <div class="ulist">
 <ul>
 <li>
-<p>baseUrl: <code>wss://ws.wbfutures.pro</code></p>
+<p>baseUrl: <code>wss://ws.wbfutures.io</code></p>
 </li>
 </ul>
 </div>
@@ -596,57 +627,26 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 <td class="content">
 <div class="paragraph">
 <p>1、支持按照1分钟5分钟这种单独订阅，需要订阅所有，就传数组，一定要传<br>
-2、lines 的数据结构为：</p>
+2、lines 的数据结构为： ```json
+[
+[${时间戳}, ${开市价格}, ${最高价格}, ${最低价格}, ${闭市价格}, ${成交量}]
+]</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="json" class="language-json hljs">[
-    [${时间戳}, ${开市价格}, ${最高价格}, ${最低价格}, ${闭市价格}, ${成交量}]
-]</code></pre>
+<pre class="highlightjs highlight"><code data-lang="3、range取值： +" class="language-3、range取值： + hljs">** 1Min = 60000ms
+** 3Min = 180000ms
+** 5Min = 300000ms
+** 15Min = 900000ms
+** 30Min = 1800000ms
+** 1Hour = 3600000ms
+** 2Hour = 7200000ms
+** 4Hour = 14400000ms
+** 6Hour = 21600000ms
+** 12Hour = 43200000ms
+** 1Day = 86400000ms
+** 1Week = 604800000ms</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>3、range取值：<br></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>1Min = 60000ms</p>
-</li>
-<li>
-<p>3Min = 180000ms</p>
-</li>
-<li>
-<p>5Min = 300000ms</p>
-</li>
-<li>
-<p>15Min = 900000ms</p>
-</li>
-<li>
-<p>30Min = 1800000ms</p>
-</li>
-<li>
-<p>1Hour = 3600000ms</p>
-</li>
-<li>
-<p>2Hour = 7200000ms</p>
-</li>
-<li>
-<p>4Hour = 14400000ms</p>
-</li>
-<li>
-<p>6Hour = 21600000ms</p>
-</li>
-<li>
-<p>12Hour = 43200000ms</p>
-</li>
-<li>
-<p>1Day = 86400000ms</p>
-</li>
-<li>
-<p>1Week = 604800000ms</p>
-</li>
-</ul>
 </div>
 </td>
 </tr>
@@ -805,10 +805,257 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect2">
-<h3 id="获取市场统计"><a class="anchor" href="#获取市场统计"></a>3.4. 获取市场统计</h3>
+<h3 id="获取历史委托"><a class="anchor" href="#获取历史委托"></a>3.4. 获取历史委托</h3>
 <div class="paragraph">
-<p>订阅topic：future_market_stat
+<p>订阅topic: <code>match</code><br>
+注意：数据集合列表中，最多50笔最近委托数据记录 消息订阅格式如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="json" class="language-json hljs">{
+    "header": {
+        "type": 1003
+    },
+    "body": {
+        "topics": [
+            {
+                "topic": "match"
+            }
+        ]
+    }
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="请求参数"><a class="anchor" href="#请求参数"></a>3.4.1. 请求参数</h4>
+
+</div>
+<div class="sect3">
+<h4 id="返回数据-4"><a class="anchor" href="#返回数据-4"></a>3.4.2. 返回数据</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">名称</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">类型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是否必须</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">默认值</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">备注</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">其他信息</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">messageType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3006</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lastId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">消息ID</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">accountId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">账号ID</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">orders</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object []</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托列表</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">item 类型: object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ orderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托号</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ side</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">买卖方向（1：买，-1：卖）</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ price</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托价格</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ quantity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托数量</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ orderType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托类型</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ timestamp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">委托时间</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ contractId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">合约ID</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ filledCurrency</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">成交金额</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ filledQuantity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">成交数量</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─canceledQuantity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">撤单数量</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ positionEffect</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">开平标志，1开仓2平仓</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ fcOrderId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">强平委托号，非空时为强平委托</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="获取币种价格"><a class="anchor" href="#获取币种价格"></a>3.5. 获取币种价格</h3>
+<div class="paragraph">
+<p>订阅topic:  <code>coin_price</code><br>
 消息订阅格式，如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="json" class="language-json hljs">{
+    "header": {
+        "type": 1003
+    },
+    "body": {
+        "topics": [
+            {
+                "topic": "exchange"
+            }
+        ]
+    }
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="返回数据-5"><a class="anchor" href="#返回数据-5"></a>3.5.1. 返回数据</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">名称</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">类型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是否必须</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">默认值</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">备注</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">其他信息</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object []</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">item 类型: object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ currencyId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">货币ID</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ latest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最新价格</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="获取市场统计"><a class="anchor" href="#获取市场统计"></a>3.6. 获取市场统计</h3>
+<div class="paragraph">
+<p>订阅topic：future_market_stat 消息订阅格式，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -827,7 +1074,7 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect3">
-<h4 id="返回数据-4"><a class="anchor" href="#返回数据-4"></a>3.4.1. 返回数据</h4>
+<h4 id="返回数据-6"><a class="anchor" href="#返回数据-6"></a>3.6.1. 返回数据</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -891,7 +1138,7 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect2">
-<h3 id="获取当前委托"><a class="anchor" href="#获取当前委托"></a>3.5. 获取当前委托</h3>
+<h3 id="获取当前委托"><a class="anchor" href="#获取当前委托"></a>3.7. 获取当前委托</h3>
 <div class="paragraph">
 <p>订阅topic: <code>match</code><br>
 消息订阅格式，如下所示：</p>
@@ -913,11 +1160,11 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect3">
-<h4 id="请求参数"><a class="anchor" href="#请求参数"></a>3.5.1. 请求参数</h4>
+<h4 id="请求参数-2"><a class="anchor" href="#请求参数-2"></a>3.7.1. 请求参数</h4>
 
 </div>
 <div class="sect3">
-<h4 id="返回数据-5"><a class="anchor" href="#返回数据-5"></a>3.5.2. 返回数据</h4>
+<h4 id="返回数据-7"><a class="anchor" href="#返回数据-7"></a>3.7.2. 返回数据</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -1093,11 +1340,10 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect2">
-<h3 id="获取成交"><a class="anchor" href="#获取成交"></a>3.6. 获取成交</h3>
+<h3 id="获取成交"><a class="anchor" href="#获取成交"></a>3.8. 获取成交</h3>
 <div class="paragraph">
 <p>订阅topic: <code>match</code><br>
-注意：数据集合列表中，最多10笔最近成交数据记录
-消息订阅格式，如下所示：</p>
+注意：数据集合列表中，最多10笔最近成交数据记录 消息订阅格式，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1116,7 +1362,7 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect3">
-<h4 id="返回数据-6"><a class="anchor" href="#返回数据-6"></a>3.6.1. 返回数据</h4>
+<h4 id="返回数据-8"><a class="anchor" href="#返回数据-8"></a>3.8.1. 返回数据</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -1276,7 +1522,7 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect2">
-<h3 id="获取全量行情数据"><a class="anchor" href="#获取全量行情数据"></a>3.7. 获取全量行情数据</h3>
+<h3 id="获取全量行情数据"><a class="anchor" href="#获取全量行情数据"></a>3.9. 获取全量行情数据</h3>
 <div class="paragraph">
 <p>订阅topic:   <code>future_all_indicator</code><br>
 消息订阅格式，如下所示：</p>
@@ -1298,7 +1544,7 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect3">
-<h4 id="返回数据-7"><a class="anchor" href="#返回数据-7"></a>3.7.1. 返回数据</h4>
+<h4 id="返回数据-9"><a class="anchor" href="#返回数据-9"></a>3.9.1. 返回数据</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -1602,10 +1848,94 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect2">
-<h3 id="获取系统时间"><a class="anchor" href="#获取系统时间"></a>3.8. 获取系统时间</h3>
+<h3 id="获取法币汇率"><a class="anchor" href="#获取法币汇率"></a>3.10. 获取法币汇率</h3>
 <div class="paragraph">
-<p>数据topic：realtime
-数据订阅格式，如下所示：</p>
+<p>注意：订阅topic名称： exchange 数据订阅格式，如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="json" class="language-json hljs">{
+    "header": {
+        "type": 1003
+    },
+    "body": {
+        "topics": [
+            {
+                "topic": "exchange"
+            }
+        ]
+    }
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="返回数据-10"><a class="anchor" href="#返回数据-10"></a>3.10.1. 返回数据</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">名称</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">类型</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是否必须</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">默认值</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">备注</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">其他信息</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">object []</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">item 类型: object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">法币Id</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">法币名称</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ rate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">汇率</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">├─ updateTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">非必须</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">更新时间</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="获取系统时间"><a class="anchor" href="#获取系统时间"></a>3.11. 获取系统时间</h3>
+<div class="paragraph">
+<p>数据topic：realtime 数据订阅格式，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1624,7 +1954,7 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect3">
-<h4 id="返回数据-8"><a class="anchor" href="#返回数据-8"></a>3.8.1. 返回数据</h4>
+<h4 id="返回数据-11"><a class="anchor" href="#返回数据-11"></a>3.11.1. 返回数据</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -1656,7 +1986,7 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect2">
-<h3 id="获取行情快照买卖档位"><a class="anchor" href="#获取行情快照买卖档位"></a>3.9. 获取行情快照买卖档位</h3>
+<h3 id="获取行情快照买卖档位"><a class="anchor" href="#获取行情快照买卖档位"></a>3.12. 获取行情快照买卖档位</h3>
 <div class="paragraph">
 <p>订阅topic: <code>future_snapshot_depth</code><br>
 数据订阅格式，如下所示：</p>
@@ -1713,7 +2043,7 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回数据-9"><a class="anchor" href="#返回数据-9"></a>3.9.1. 返回数据</h4>
+<h4 id="返回数据-12"><a class="anchor" href="#返回数据-12"></a>3.12.1. 返回数据</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -1761,7 +2091,7 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect2">
-<h3 id="获取行情快照基础数据"><a class="anchor" href="#获取行情快照基础数据"></a>3.10. 获取行情快照基础数据</h3>
+<h3 id="获取行情快照基础数据"><a class="anchor" href="#获取行情快照基础数据"></a>3.13. 获取行情快照基础数据</h3>
 <div class="paragraph">
 <p>订阅topic: <code>future_snapshot_indicator</code><br>
 数据订阅格式，如下所示：</p>
@@ -1802,7 +2132,7 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回数据-10"><a class="anchor" href="#返回数据-10"></a>3.10.1. 返回数据</h4>
+<h4 id="返回数据-13"><a class="anchor" href="#返回数据-13"></a>3.13.1. 返回数据</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -2098,10 +2428,9 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect2">
-<h3 id="获取资产"><a class="anchor" href="#获取资产"></a>3.11. 获取资产</h3>
+<h3 id="获取资产"><a class="anchor" href="#获取资产"></a>3.14. 获取资产</h3>
 <div class="paragraph">
-<p>数据topic: match
-数据订阅格式，如下所示：</p>
+<p>数据topic: match 数据订阅格式，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2120,7 +2449,7 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect3">
-<h4 id="返回数据-11"><a class="anchor" href="#返回数据-11"></a>3.11.1. 返回数据</h4>
+<h4 id="返回数据-14"><a class="anchor" href="#返回数据-14"></a>3.14.1. 返回数据</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -2224,10 +2553,9 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect2">
-<h3 id="获取逐笔成交"><a class="anchor" href="#获取逐笔成交"></a>3.12. 获取逐笔成交</h3>
+<h3 id="获取逐笔成交"><a class="anchor" href="#获取逐笔成交"></a>3.15. 获取逐笔成交</h3>
 <div class="paragraph">
-<p>数据topic: future_tick
-数据订阅格式，如下所示：</p>
+<p>数据topic: future_tick 数据订阅格式，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2277,7 +2605,7 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </table>
 </div>
 <div class="sect3">
-<h4 id="返回数据-12"><a class="anchor" href="#返回数据-12"></a>3.12.1. 返回数据</h4>
+<h4 id="返回数据-15"><a class="anchor" href="#返回数据-15"></a>3.15.1. 返回数据</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -2317,7 +2645,7 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect2">
-<h3 id="获取通知"><a class="anchor" href="#获取通知"></a>3.13. 获取通知</h3>
+<h3 id="获取通知"><a class="anchor" href="#获取通知"></a>3.16. 获取通知</h3>
 <div class="paragraph">
 <p><code>topic：notice</code>
 订阅格式，如下所示：</p>
@@ -2339,7 +2667,7 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 </div>
 </div>
 <div class="sect3">
-<h4 id="返回数据-13"><a class="anchor" href="#返回数据-13"></a>3.13.1. 返回数据</h4>
+<h4 id="返回数据-16"><a class="anchor" href="#返回数据-16"></a>3.16.1. 返回数据</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -2416,23 +2744,24 @@ signature: 签名方式同restful , 其中method="GET"，path="GET/realtime"
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2020-09-02 15:58:08 +0800
+Last updated 2021-04-15 16:57:29 +0800
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
 <script>hljs.initHighlighting()</script>
 <!-- <script src="tocbot-3.0.2/tocbot.js"></script> -->
-<script src="https://docs.spring.io/spring-boot/docs/current/reference/html/js/tocbot/tocbot.min.js"></script>
+<script
+    src="https://docs.spring.io/spring-boot/docs/current/reference/html/js/tocbot/tocbot.min.js"></script>
 <script src="https://docs.spring.io/spring-boot/docs/current/reference/html/js/toc.js"></script>
 <script>
-    var hs = document.getElementById("header-spring");
-    var h1 = hs.getElementsByTagName("h1")[0];
-    h1.innerHTML = "";
+  var hs = document.getElementById("header-spring");
+  var h1 = hs.getElementsByTagName("h1")[0];
+  h1.innerHTML = "";
 
-    img = document.createElement("img")
-    img.setAttribute("src", "images/wbf.png")
-    h1.appendChild(img)
+  img = document.createElement("img")
+  img.setAttribute("src", "images/wbf.png")
+  h1.appendChild(img)
 
 </script>
 </body>
